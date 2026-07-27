@@ -1,0 +1,118 @@
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[project]
+name = "neuropager"
+version = "0.1.0"
+description = "A neuro-symbolic virtual memory manager for lifelong LLM agents."
+readme = "README.md"
+requires-python = ">=3.11"
+license = { file = "LICENSE" }
+authors = [
+    { name = "Kavimugil SK", email = "skkavi4618@gmail.com" },
+]
+keywords = [
+    "llm",
+    "agents",
+    "memory",
+    "neuro-symbolic",
+    "knowledge-graph",
+    "retrieval-augmented-generation",
+    "virtual-memory",
+    "lifelong-learning",
+]
+classifiers = [
+    "Development Status :: 2 - Pre-Alpha",
+    "Intended Audience :: Science/Research",
+    "Intended Audience :: Developers",
+    "License :: OSI Approved :: MIT License",
+    "Operating System :: OS Independent",
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3.11",
+    "Programming Language :: Python :: 3.12",
+    "Programming Language :: Python :: 3 :: Only",
+    "Topic :: Scientific/Engineering :: Artificial Intelligence",
+    "Typing :: Typed",
+]
+
+# NOTE: Dependencies are intentionally left minimal at this stage.
+# This is a structural scaffold — no algorithms are implemented yet.
+dependencies = []
+
+[project.optional-dependencies]
+dev = [
+    "ruff>=0.6",
+    "black>=24.0",
+    "mypy>=1.10",
+    "pytest>=8.0",
+    "pytest-cov>=5.0",
+    "pre-commit>=3.7",
+]
+docs = [
+    "mkdocs>=1.6",
+    "mkdocs-material>=9.5",
+]
+
+[project.urls]
+Homepage = "https://github.com/kavimugilsk/neuropager"
+Repository = "https://github.com/kavimugilsk/neuropager"
+Issues = "https://github.com/kavimugilsk/neuropager/issues"
+Documentation = "https://github.com/kavimugilsk/neuropager/tree/main/docs"
+
+[tool.hatch.build.targets.wheel]
+packages = ["src/neuropager"]
+
+[tool.ruff]
+line-length = 100
+target-version = "py311"
+src = ["src", "tests"]
+
+[tool.ruff.lint]
+select = [
+    "E",   # pycodestyle errors
+    "F",   # pyflakes
+    "I",   # isort
+    "UP",  # pyupgrade
+    "B",   # flake8-bugbear
+    "N",   # pep8-naming
+    "D",   # pydocstyle
+    "ANN", # flake8-annotations
+]
+ignore = [
+    "D203",   # incompatible with D211
+    "D213",   # incompatible with D212
+    "ANN401", # `Any` is intentional for generic memory payloads (content: Any)
+]
+
+[tool.ruff.lint.pydocstyle]
+convention = "google"
+
+[tool.black]
+line-length = 100
+target-version = ["py311"]
+
+[tool.mypy]
+python_version = "3.11"
+strict = true
+packages = ["neuropager"]
+mypy_path = "src"
+namespace_packages = true
+explicit_package_bases = true
+
+[tool.pytest.ini_options]
+minversion = "8.0"
+addopts = "-ra -q --strict-markers"
+testpaths = ["tests"]
+
+[tool.coverage.run]
+source = ["src/neuropager"]
+branch = true
+
+[tool.coverage.report]
+exclude_lines = [
+    "pragma: no cover",
+    "raise NotImplementedError",
+    "if TYPE_CHECKING:",
+    "\\.\\.\\.",
+]

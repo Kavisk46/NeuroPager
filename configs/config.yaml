@@ -1,0 +1,45 @@
+# NeuroPager default configuration.
+#
+# This file defines the default runtime configuration for a NeuroPager
+# MemoryManager instance. Values here are loaded by `neuropager.settings`.
+#
+# NOTE: This is a scaffold. Keys reflect the planned configuration surface
+# described in docs/design.md; no logic currently reads every key below.
+
+neuropager:
+  # Working memory: the agent's resident "hot" context.
+  working_memory:
+    capacity: 128            # max number of resident memory pages
+    eviction_policy: lru     # one of: lru | lfu | fifo
+
+  # Page table / fault handling behavior.
+  page_table:
+    track_access_history: true
+    dirty_bit_tracking: true
+
+  # Memory subsystem backends.
+  memory:
+    episodic:
+      backend: in_memory     # one of: in_memory | disk
+    vector_store:
+      backend: in_memory     # one of: in_memory | faiss | external
+      embedding_dim: 768
+      distance_metric: cosine
+    knowledge_graph:
+      backend: in_memory     # one of: in_memory | external
+    disk_store:
+      backend: filesystem
+      path: "./data/disk_store"
+
+  # Hybrid retrieval fusion.
+  retrieval:
+    top_k: 10
+    vector_weight: 0.6
+    graph_weight: 0.4
+
+  # Logging configuration file (see logging.yaml).
+  logging:
+    config_path: "configs/logging.yaml"
+
+  # Reproducibility.
+  seed: 42

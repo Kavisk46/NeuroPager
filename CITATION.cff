@@ -1,0 +1,21 @@
+cff-version: 1.2.0
+message: "If you use NeuroPager in your research, please cite it as below."
+title: "NeuroPager: A Neuro-Symbolic Virtual Memory Manager for Lifelong LLM Agents"
+authors:
+  - family-names: "SK"
+    given-names: "Kavimugil"
+    email: "skkavi4618@gmail.com"
+version: 0.1.0
+date-released: "2026-07-28"
+url: "https://github.com/kavimugilsk/neuropager"
+repository-code: "https://github.com/kavimugilsk/neuropager"
+license: MIT
+keywords:
+  - large-language-models
+  - memory-management
+  - neuro-symbolic-ai
+  - knowledge-graphs
+  - retrieval-augmented-generation
+  - lifelong-learning
+  - agents
+type: software

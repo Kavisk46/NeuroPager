@@ -1,0 +1,13 @@
+# CODEOWNERS
+# These owners will be requested for review when someone opens a pull
+# request that modifies the matching paths.
+# See: https://docs.github.com/en/repositories/managing-your-repositorys-settings-and-features/customizing-your-repository/about-code-owners
+
+* @kavimugilsk
+
+/src/neuropager/core/ @kavimugilsk
+/src/neuropager/memory/ @kavimugilsk
+/src/neuropager/policies/ @kavimugilsk
+/src/neuropager/retrieval/ @kavimugilsk
+/docs/ @kavimugilsk
+/.github/ @kavimugilsk

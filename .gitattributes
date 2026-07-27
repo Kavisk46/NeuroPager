@@ -1,0 +1,32 @@
+# Auto detect text files and perform LF normalization
+* text=auto eol=lf
+
+*.py text diff=python
+*.pyi text diff=python
+*.md text
+*.yaml text
+*.yml text
+*.toml text
+*.json text
+*.cff text
+
+# Jupyter notebooks: keep diffs readable
+*.ipynb text -diff
+
+# Binary assets
+*.png binary
+*.jpg binary
+*.jpeg binary
+*.gif binary
+*.ico binary
+*.pdf binary
+*.zip binary
+
+# Windows scripts should keep CRLF
+*.bat text eol=crlf
+*.cmd text eol=crlf
+
+# Linguist overrides: don't count generated/vendored/docs content as "code"
+docs/* linguist-documentation
+notebooks/* linguist-documentation
+assets/* linguist-vendored
