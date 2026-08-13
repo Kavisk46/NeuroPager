@@ -36,9 +36,14 @@ classifiers = [
     "Typing :: Typed",
 ]
 
-# NOTE: Dependencies are intentionally left minimal at this stage.
-# This is a structural scaffold — no algorithms are implemented yet.
-dependencies = []
+# NOTE: Dependencies are intentionally kept minimal. scikit-learn (and its
+# numpy/scipy transitive dependencies) is the first runtime dependency,
+# added for the Memory Utility Model experiment pipeline
+# (neuropager.experiment): logistic regression + gradient-boosted-tree
+# baselines, with no heavier ML framework pulled in.
+dependencies = [
+    "scikit-learn>=1.4",
+]
 
 [project.optional-dependencies]
 dev = [
@@ -99,6 +104,14 @@ packages = ["neuropager"]
 mypy_path = "src"
 namespace_packages = true
 explicit_package_bases = true
+
+# scikit-learn does not ship a py.typed marker, so mypy cannot see its
+# stubs regardless of version; scope the resulting import-untyped errors
+# to just that module tree rather than disabling strict checking of our
+# own code that uses it.
+[[tool.mypy.overrides]]
+module = "sklearn.*"
+ignore_missing_imports = true
 
 [tool.pytest.ini_options]
 minversion = "8.0"

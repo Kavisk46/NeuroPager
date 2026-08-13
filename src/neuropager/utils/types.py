@@ -8,7 +8,7 @@ modules can interoperate without depending on each other's internals.
 from __future__ import annotations
 
 from dataclasses import dataclass, field
-from datetime import datetime
+from datetime import UTC, datetime
 from enum import StrEnum
 from typing import Any, NewType
 
@@ -51,6 +51,41 @@ class MemoryPage:
     last_accessed_at: datetime
     access_count: int = 0
     metadata: dict[str, Any] = field(default_factory=dict)
+
+
+def create_page(
+    key: MemoryKey,
+    content: Any,
+    *,
+    tier: MemoryTier = MemoryTier.WORKING,
+    metadata: dict[str, Any] | None = None,
+) -> MemoryPage:
+    """Construct a new :class:`MemoryPage` stamped with the current time.
+
+    Centralizes page creation so ``created_at``/``last_accessed_at`` are
+    always set consistently, rather than every call site constructing
+    :class:`MemoryPage` by hand.
+
+    Args:
+        key: Logical identifier for the new memory unit.
+        content: The raw content payload to store.
+        tier: The physical tier the page should initially be recorded in.
+        metadata: Optional free-form metadata; defaults to an empty dict.
+
+    Returns:
+        A new :class:`MemoryPage` with ``created_at`` and
+        ``last_accessed_at`` set to now (UTC) and ``access_count`` at 0.
+    """
+    now = datetime.now(UTC)
+    return MemoryPage(
+        key=key,
+        content=content,
+        tier=tier,
+        created_at=now,
+        last_accessed_at=now,
+        access_count=0,
+        metadata=metadata if metadata is not None else {},
+    )
 
 
 @dataclass

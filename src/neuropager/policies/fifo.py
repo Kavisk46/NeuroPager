@@ -13,12 +13,13 @@ from neuropager.utils.types import MemoryKey
 
 
 class FIFOPolicy(PageReplacementPolicy):
-    """Evicts the resident page that was inserted longest ago."""
+    """Evicts the resident page that was inserted longest ago.
 
-    def __init__(self) -> None:
-        """Initialize the FIFO policy with an empty insertion queue."""
-        # TODO(neuropager): back this with a simple queue (e.g. deque)
-        # tracking insertion order.
+    Insertion order is not duplicated inside this policy: it is read
+    directly from :class:`~neuropager.core.page_table.PageTable`, which
+    already tracks a per-key ``resident_since`` logical tick for exactly
+    this purpose.
+    """
 
     def select_victim(self, page_table: PageTable) -> MemoryKey:
         """Select the oldest-inserted resident key for eviction.
@@ -27,40 +28,35 @@ class FIFOPolicy(PageReplacementPolicy):
             page_table: The page table to consult for residency and access
                 metadata.
 
+        Returns:
+            The resident key with the smallest (oldest) ``resident_since``
+            tick.
+
         Raises:
-            NotImplementedError: Not yet implemented.
+            ValueError: If ``page_table`` has no resident pages.
         """
-        raise NotImplementedError
+        resident = page_table.resident_keys()
+        if not resident:
+            raise ValueError("cannot select a victim: no resident pages in working memory")
+        return min(resident, key=lambda key: page_table.get_entry(key).resident_since)
 
     def on_access(self, key: MemoryKey) -> None:
         """No-op: FIFO does not consider access recency or frequency.
 
         Args:
             key: The logical memory identifier that was accessed.
-
-        Raises:
-            NotImplementedError: Not yet implemented.
         """
-        raise NotImplementedError
 
     def on_insert(self, key: MemoryKey) -> None:
-        """Append ``key`` to the insertion queue.
+        """No-op: insertion order is tracked by the page table.
 
         Args:
             key: The logical memory identifier that was inserted.
-
-        Raises:
-            NotImplementedError: Not yet implemented.
         """
-        raise NotImplementedError
 
     def on_evict(self, key: MemoryKey) -> None:
-        """Remove ``key`` from the insertion queue.
+        """No-op: this policy holds no per-key state to clean up.
 
         Args:
             key: The logical memory identifier that was evicted.
-
-        Raises:
-            NotImplementedError: Not yet implemented.
         """
-        raise NotImplementedError

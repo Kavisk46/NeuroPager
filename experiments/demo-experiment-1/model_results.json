@@ -1,0 +1,688 @@
+{
+  "model_results": [
+    {
+      "metadata": {
+        "experiment_id": "demo-experiment-1",
+        "feature_order": [
+          "recency",
+          "frequency",
+          "avg_inter_access_interval",
+          "inter_access_interval_variance",
+          "fault_count",
+          "fault_ratio",
+          "page_age",
+          "recent_burst",
+          "long_burst",
+          "recent_interval",
+          "normalized_recency",
+          "elapsed_since_fault",
+          "max_historical_interval"
+        ],
+        "generated_at": "2026-08-13T17:37:43.389930+00:00",
+        "horizon": 10,
+        "model_config": {
+          "max_iter": 1000,
+          "model": "logistic_regression",
+          "random_state": 0,
+          "scaled": true
+        },
+        "model_name": "logistic_regression",
+        "neuropager_version": "0.1.0",
+        "seed": 0,
+        "sklearn_version": "1.5.2",
+        "split": {
+          "seed": 0,
+          "test_episodes": [
+            "demo-ep-1",
+            "demo-ep-20",
+            "demo-ep-2"
+          ],
+          "test_fraction": 0.15,
+          "train_episodes": [
+            "demo-ep-21",
+            "demo-ep-0",
+            "demo-ep-3",
+            "demo-ep-15",
+            "demo-ep-14",
+            "demo-ep-19",
+            "demo-ep-8",
+            "demo-ep-7",
+            "demo-ep-18",
+            "demo-ep-12",
+            "demo-ep-10",
+            "demo-ep-6",
+            "demo-ep-11",
+            "demo-ep-5",
+            "demo-ep-13",
+            "demo-ep-4",
+            "demo-ep-17"
+          ],
+          "train_fraction": 0.7,
+          "val_episodes": [
+            "demo-ep-9",
+            "demo-ep-22",
+            "demo-ep-23",
+            "demo-ep-16"
+          ],
+          "val_fraction": 0.15
+        },
+        "working_memory_capacity": 4
+      },
+      "test_metrics": {
+        "accuracy": 0.660958904109589,
+        "brier_score": 0.22921526215816912,
+        "calibration_curve": [
+          [
+            0.4897663311921446,
+            0.4915254237288136
+          ],
+          [
+            0.6776509417458086,
+            0.5689655172413793
+          ],
+          [
+            0.7314182091845514,
+            0.7586206896551724
+          ],
+          [
+            0.7542428903506775,
+            0.6896551724137931
+          ],
+          [
+            0.8050359197697158,
+            0.6610169491525424
+          ]
+        ],
+        "f1": 0.7833698030634574,
+        "n_examples": 292,
+        "n_negative": 107,
+        "n_positive": 185,
+        "pr_auc": 0.6483669708959845,
+        "precision": 0.6580882352941176,
+        "recall": 0.9675675675675676,
+        "roc_auc": 0.5796665824703208
+      },
+      "train_metrics": {
+        "accuracy": 0.7194989106753813,
+        "brier_score": 0.19926117356629572,
+        "calibration_curve": [
+          [
+            0.4604834997910668,
+            0.44021739130434784
+          ],
+          [
+            0.6565830762494991,
+            0.6975476839237057
+          ],
+          [
+            0.7169176522008667,
+            0.7138964577656676
+          ],
+          [
+            0.7488865876610998,
+            0.7538860103626943
+          ],
+          [
+            0.7971079979610822,
+            0.7729885057471264
+          ]
+        ],
+        "f1": 0.8223525353570197,
+        "n_examples": 1836,
+        "n_negative": 596,
+        "n_positive": 1240,
+        "pr_auc": 0.7682460456913369,
+        "precision": 0.7185051235684147,
+        "recall": 0.9612903225806452,
+        "roc_auc": 0.6461226726564191
+      },
+      "val_metrics": {
+        "accuracy": 0.6863207547169812,
+        "brier_score": 0.21170414053675182,
+        "calibration_curve": [
+          [
+            0.5008468783068079,
+            0.4470588235294118
+          ],
+          [
+            0.674461775426135,
+            0.6941176470588235
+          ],
+          [
+            0.7305440604292583,
+            0.6547619047619048
+          ],
+          [
+            0.7575035885019791,
+            0.7176470588235294
+          ],
+          [
+            0.8083082990264692,
+            0.7764705882352941
+          ]
+        ],
+        "f1": 0.8023774145616642,
+        "n_examples": 424,
+        "n_negative": 145,
+        "n_positive": 279,
+        "pr_auc": 0.7357389017883567,
+        "precision": 0.6852791878172588,
+        "recall": 0.967741935483871,
+        "roc_auc": 0.635360276850822
+      }
+    },
+    {
+      "metadata": {
+        "experiment_id": "demo-experiment-1",
+        "feature_order": [
+          "recency",
+          "frequency",
+          "avg_inter_access_interval",
+          "inter_access_interval_variance",
+          "fault_count",
+          "fault_ratio",
+          "page_age",
+          "recent_burst",
+          "long_burst",
+          "recent_interval",
+          "normalized_recency",
+          "elapsed_since_fault",
+          "max_historical_interval"
+        ],
+        "generated_at": "2026-08-13T17:37:48.473574+00:00",
+        "horizon": 10,
+        "model_config": {
+          "max_iter": 100,
+          "model": "hist_gradient_boosting",
+          "random_state": 0,
+          "scaled": false
+        },
+        "model_name": "hist_gradient_boosting",
+        "neuropager_version": "0.1.0",
+        "seed": 0,
+        "sklearn_version": "1.5.2",
+        "split": {
+          "seed": 0,
+          "test_episodes": [
+            "demo-ep-1",
+            "demo-ep-20",
+            "demo-ep-2"
+          ],
+          "test_fraction": 0.15,
+          "train_episodes": [
+            "demo-ep-21",
+            "demo-ep-0",
+            "demo-ep-3",
+            "demo-ep-15",
+            "demo-ep-14",
+            "demo-ep-19",
+            "demo-ep-8",
+            "demo-ep-7",
+            "demo-ep-18",
+            "demo-ep-12",
+            "demo-ep-10",
+            "demo-ep-6",
+            "demo-ep-11",
+            "demo-ep-5",
+            "demo-ep-13",
+            "demo-ep-4",
+            "demo-ep-17"
+          ],
+          "train_fraction": 0.7,
+          "val_episodes": [
+            "demo-ep-9",
+            "demo-ep-22",
+            "demo-ep-23",
+            "demo-ep-16"
+          ],
+          "val_fraction": 0.15
+        },
+        "working_memory_capacity": 4
+      },
+      "test_metrics": {
+        "accuracy": 0.6404109589041096,
+        "brier_score": 0.2644790776497702,
+        "calibration_curve": [
+          [
+            0.25100629791530704,
+            0.4745762711864407
+          ],
+          [
+            0.6541854649618125,
+            0.6875
+          ],
+          [
+            0.7782677729766779,
+            0.7115384615384616
+          ],
+          [
+            0.8727556380917699,
+            0.5862068965517241
+          ],
+          [
+            0.9648249264744747,
+            0.711864406779661
+          ]
+        ],
+        "f1": 0.7469879518072289,
+        "n_examples": 292,
+        "n_negative": 107,
+        "n_positive": 185,
+        "pr_auc": 0.6953378143920705,
+        "precision": 0.6739130434782609,
+        "recall": 0.8378378378378378,
+        "roc_auc": 0.5777721646880526
+      },
+      "train_metrics": {
+        "accuracy": 0.9313725490196079,
+        "brier_score": 0.06286610036185139,
+        "calibration_curve": [
+          [
+            0.10765317569941779,
+            0.0
+          ],
+          [
+            0.6066370943942322,
+            0.5298329355608592
+          ],
+          [
+            0.8007428987412769,
+            0.9047619047619048
+          ],
+          [
+            0.9134312254657281,
+            0.997275204359673
+          ],
+          [
+            0.9766636796562692,
+            1.0
+          ]
+        ],
+        "f1": 0.9511249030256013,
+        "n_examples": 1836,
+        "n_negative": 596,
+        "n_positive": 1240,
+        "pr_auc": 0.9865511310835029,
+        "precision": 0.9162929745889388,
+        "recall": 0.9887096774193549,
+        "roc_auc": 0.9761345799956701
+      },
+      "val_metrics": {
+        "accuracy": 0.6533018867924528,
+        "brier_score": 0.25059803277344717,
+        "calibration_curve": [
+          [
+            0.3039324922539132,
+            0.5294117647058824
+          ],
+          [
+            0.6852263843323506,
+            0.6695652173913044
+          ],
+          [
+            0.7813361410045869,
+            0.6666666666666666
+          ],
+          [
+            0.8778050256349127,
+            0.7176470588235294
+          ],
+          [
+            0.9681238353922682,
+            0.7058823529411765
+          ]
+        ],
+        "f1": 0.7640449438202247,
+        "n_examples": 424,
+        "n_negative": 145,
+        "n_positive": 279,
+        "pr_auc": 0.7038210525664335,
+        "precision": 0.6918604651162791,
+        "recall": 0.8530465949820788,
+        "roc_auc": 0.5805833642318626
+      }
+    },
+    {
+      "metadata": {
+        "experiment_id": "demo-experiment-1",
+        "feature_order": [
+          "recency",
+          "frequency",
+          "avg_inter_access_interval",
+          "inter_access_interval_variance",
+          "fault_count",
+          "fault_ratio",
+          "page_age",
+          "recent_burst",
+          "long_burst",
+          "recent_interval",
+          "normalized_recency",
+          "elapsed_since_fault",
+          "max_historical_interval"
+        ],
+        "generated_at": "2026-08-13T17:37:48.821196+00:00",
+        "horizon": 25,
+        "model_config": {
+          "max_iter": 1000,
+          "model": "logistic_regression",
+          "random_state": 0,
+          "scaled": true
+        },
+        "model_name": "logistic_regression",
+        "neuropager_version": "0.1.0",
+        "seed": 0,
+        "sklearn_version": "1.5.2",
+        "split": {
+          "seed": 0,
+          "test_episodes": [
+            "demo-ep-1",
+            "demo-ep-20",
+            "demo-ep-2"
+          ],
+          "test_fraction": 0.15,
+          "train_episodes": [
+            "demo-ep-21",
+            "demo-ep-0",
+            "demo-ep-3",
+            "demo-ep-15",
+            "demo-ep-14",
+            "demo-ep-19",
+            "demo-ep-8",
+            "demo-ep-7",
+            "demo-ep-18",
+            "demo-ep-12",
+            "demo-ep-10",
+            "demo-ep-6",
+            "demo-ep-11",
+            "demo-ep-5",
+            "demo-ep-13",
+            "demo-ep-4",
+            "demo-ep-17"
+          ],
+          "train_fraction": 0.7,
+          "val_episodes": [
+            "demo-ep-9",
+            "demo-ep-22",
+            "demo-ep-23",
+            "demo-ep-16"
+          ],
+          "val_fraction": 0.15
+        },
+        "working_memory_capacity": 4
+      },
+      "test_metrics": {
+        "accuracy": 0.8424657534246576,
+        "brier_score": 0.10789753194420454,
+        "calibration_curve": [
+          [
+            0.4942886213383778,
+            0.4406779661016949
+          ],
+          [
+            0.8305384109928626,
+            0.7931034482758621
+          ],
+          [
+            0.9279632939615671,
+            0.9310344827586207
+          ],
+          [
+            0.9574316684312871,
+            0.9655172413793104
+          ],
+          [
+            0.9771979103591875,
+            0.9491525423728814
+          ]
+        ],
+        "f1": 0.9087301587301587,
+        "n_examples": 292,
+        "n_negative": 54,
+        "n_positive": 238,
+        "pr_auc": 0.9503194397500411,
+        "precision": 0.8609022556390977,
+        "recall": 0.9621848739495799,
+        "roc_auc": 0.8419701213818861
+      },
+      "train_metrics": {
+        "accuracy": 0.869281045751634,
+        "brier_score": 0.09774966417734691,
+        "calibration_curve": [
+          [
+            0.47563735479368363,
+            0.4483695652173913
+          ],
+          [
+            0.817952063600619,
+            0.8283378746594006
+          ],
+          [
+            0.9183541041034475,
+            0.9575596816976127
+          ],
+          [
+            0.9499358499648888,
+            0.9495798319327731
+          ],
+          [
+            0.976843452366749,
+            0.9536784741144414
+          ]
+        ],
+        "f1": 0.9243379571248423,
+        "n_examples": 1836,
+        "n_negative": 317,
+        "n_positive": 1519,
+        "pr_auc": 0.9412900044338326,
+        "precision": 0.8868723532970357,
+        "recall": 0.9651086240947993,
+        "roc_auc": 0.8329789023577274
+      },
+      "val_metrics": {
+        "accuracy": 0.8608490566037735,
+        "brier_score": 0.09887184821267402,
+        "calibration_curve": [
+          [
+            0.5293308144169888,
+            0.4588235294117647
+          ],
+          [
+            0.8417492666959451,
+            0.8470588235294118
+          ],
+          [
+            0.9277134668509213,
+            0.9523809523809523
+          ],
+          [
+            0.9560746806596938,
+            0.9529411764705882
+          ],
+          [
+            0.9767944537033217,
+            0.9529411764705882
+          ]
+        ],
+        "f1": 0.9210174029451138,
+        "n_examples": 424,
+        "n_negative": 71,
+        "n_positive": 353,
+        "pr_auc": 0.9503226804617786,
+        "precision": 0.8730964467005076,
+        "recall": 0.9745042492917847,
+        "roc_auc": 0.8311654630331565
+      }
+    },
+    {
+      "metadata": {
+        "experiment_id": "demo-experiment-1",
+        "feature_order": [
+          "recency",
+          "frequency",
+          "avg_inter_access_interval",
+          "inter_access_interval_variance",
+          "fault_count",
+          "fault_ratio",
+          "page_age",
+          "recent_burst",
+          "long_burst",
+          "recent_interval",
+          "normalized_recency",
+          "elapsed_since_fault",
+          "max_historical_interval"
+        ],
+        "generated_at": "2026-08-13T17:37:54.251843+00:00",
+        "horizon": 25,
+        "model_config": {
+          "max_iter": 100,
+          "model": "hist_gradient_boosting",
+          "random_state": 0,
+          "scaled": false
+        },
+        "model_name": "hist_gradient_boosting",
+        "neuropager_version": "0.1.0",
+        "seed": 0,
+        "sklearn_version": "1.5.2",
+        "split": {
+          "seed": 0,
+          "test_episodes": [
+            "demo-ep-1",
+            "demo-ep-20",
+            "demo-ep-2"
+          ],
+          "test_fraction": 0.15,
+          "train_episodes": [
+            "demo-ep-21",
+            "demo-ep-0",
+            "demo-ep-3",
+            "demo-ep-15",
+            "demo-ep-14",
+            "demo-ep-19",
+            "demo-ep-8",
+            "demo-ep-7",
+            "demo-ep-18",
+            "demo-ep-12",
+            "demo-ep-10",
+            "demo-ep-6",
+            "demo-ep-11",
+            "demo-ep-5",
+            "demo-ep-13",
+            "demo-ep-4",
+            "demo-ep-17"
+          ],
+          "train_fraction": 0.7,
+          "val_episodes": [
+            "demo-ep-9",
+            "demo-ep-22",
+            "demo-ep-23",
+            "demo-ep-16"
+          ],
+          "val_fraction": 0.15
+        },
+        "working_memory_capacity": 4
+      },
+      "test_metrics": {
+        "accuracy": 0.8595890410958904,
+        "brier_score": 0.12127440810908871,
+        "calibration_curve": [
+          [
+            0.4810676301471987,
+            0.4915254237288136
+          ],
+          [
+            0.9285917164744302,
+            0.896551724137931
+          ],
+          [
+            0.9744746779661541,
+            0.896551724137931
+          ],
+          [
+            0.9926993769267712,
+            0.896551724137931
+          ],
+          [
+            0.9983459900114645,
+            0.8983050847457628
+          ]
+        ],
+        "f1": 0.9184890656063618,
+        "n_examples": 292,
+        "n_negative": 54,
+        "n_positive": 238,
+        "pr_auc": 0.8999737816286313,
+        "precision": 0.8716981132075472,
+        "recall": 0.9705882352941176,
+        "roc_auc": 0.7329209461562404
+      },
+      "train_metrics": {
+        "accuracy": 0.9831154684095861,
+        "brier_score": 0.01498817587604909,
+        "calibration_curve": [
+          [
+            0.22546605710387288,
+            0.1783783783783784
+          ],
+          [
+            0.9392871364449066,
+            0.9643835616438357
+          ],
+          [
+            0.9828135168587704,
+            1.0
+          ],
+          [
+            0.9953170497464757,
+            1.0
+          ],
+          [
+            0.9988312794932873,
+            1.0
+          ]
+        ],
+        "f1": 0.98989898989899,
+        "n_examples": 1836,
+        "n_negative": 317,
+        "n_positive": 1519,
+        "pr_auc": 0.9982239795873018,
+        "precision": 0.98,
+        "recall": 1.0,
+        "roc_auc": 0.9932142389875457
+      },
+      "val_metrics": {
+        "accuracy": 0.8702830188679245,
+        "brier_score": 0.10421622125755263,
+        "calibration_curve": [
+          [
+            0.4967536660537216,
+            0.49411764705882355
+          ],
+          [
+            0.9282593834944085,
+            0.9130434782608695
+          ],
+          [
+            0.9746846837436096,
+            0.961038961038961
+          ],
+          [
+            0.9926063637568239,
+            0.9176470588235294
+          ],
+          [
+            0.9982942211032426,
+            0.8823529411764706
+          ]
+        ],
+        "f1": 0.925575101488498,
+        "n_examples": 424,
+        "n_negative": 71,
+        "n_positive": 353,
+        "pr_auc": 0.9158615513134167,
+        "precision": 0.8860103626943006,
+        "recall": 0.9688385269121813,
+        "roc_auc": 0.7559749431432791
+      }
+    }
+  ]
+}

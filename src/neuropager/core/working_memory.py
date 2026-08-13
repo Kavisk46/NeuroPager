@@ -11,6 +11,10 @@ from __future__ import annotations
 from neuropager.utils.types import MemoryKey, MemoryPage
 
 
+class WorkingMemoryFullError(RuntimeError):
+    """Raised when inserting a new key into a :class:`WorkingMemory` at capacity."""
+
+
 class WorkingMemory:
     """Bounded container holding the agent's currently resident memory pages.
 
@@ -22,38 +26,32 @@ class WorkingMemory:
         """Initialize working memory with a fixed capacity.
 
         Args:
-            capacity: Maximum number of resident memory pages.
+            capacity: Maximum number of resident memory pages. Must be a
+                positive integer.
+
+        Raises:
+            ValueError: If ``capacity`` is not a positive integer.
         """
+        if capacity <= 0:
+            raise ValueError(f"capacity must be a positive integer, got {capacity}")
         self.capacity = capacity
-        # TODO(neuropager): back this with an actual ordered store once
-        # implemented (e.g. dict preserving insertion/access order).
+        self._pages: dict[MemoryKey, MemoryPage] = {}
 
     def __len__(self) -> int:
-        """Return the number of pages currently resident.
-
-        Raises:
-            NotImplementedError: Not yet implemented.
-        """
-        raise NotImplementedError
+        """Return the number of pages currently resident."""
+        return len(self._pages)
 
     def is_full(self) -> bool:
-        """Return whether working memory is at capacity.
-
-        Raises:
-            NotImplementedError: Not yet implemented.
-        """
-        raise NotImplementedError
+        """Return whether working memory is at capacity."""
+        return len(self._pages) >= self.capacity
 
     def contains(self, key: MemoryKey) -> bool:
         """Return whether ``key`` is currently resident.
 
         Args:
             key: Logical memory identifier to check.
-
-        Raises:
-            NotImplementedError: Not yet implemented.
         """
-        raise NotImplementedError
+        return key in self._pages
 
     def get(self, key: MemoryKey) -> MemoryPage:
         """Return the resident page for ``key``.
@@ -63,24 +61,34 @@ class WorkingMemory:
 
         Raises:
             KeyError: If ``key`` is not resident.
-            NotImplementedError: Not yet implemented.
         """
-        raise NotImplementedError
+        try:
+            return self._pages[key]
+        except KeyError:
+            raise KeyError(key) from None
 
     def insert(self, page: MemoryPage) -> None:
         """Insert a page into working memory.
 
         Callers are responsible for ensuring capacity is available (e.g. by
         evicting via a :class:`~neuropager.policies.base.PageReplacementPolicy`
-        beforehand); this method does not evict on its own.
+        beforehand); this method does not evict on its own. Re-inserting an
+        already-resident key (an update) is always permitted, even at
+        capacity.
 
         Args:
             page: The memory page to insert.
 
         Raises:
-            NotImplementedError: Not yet implemented.
+            WorkingMemoryFullError: If working memory is at capacity and
+                ``page.key`` is not already resident.
         """
-        raise NotImplementedError
+        if self.is_full() and page.key not in self._pages:
+            raise WorkingMemoryFullError(
+                f"cannot insert key {page.key!r}: working memory is at capacity "
+                f"({self.capacity})"
+            )
+        self._pages[page.key] = page
 
     def remove(self, key: MemoryKey) -> MemoryPage:
         """Remove and return the resident page for ``key``.
@@ -90,6 +98,8 @@ class WorkingMemory:
 
         Raises:
             KeyError: If ``key`` is not resident.
-            NotImplementedError: Not yet implemented.
         """
-        raise NotImplementedError
+        try:
+            return self._pages.pop(key)
+        except KeyError:
+            raise KeyError(key) from None

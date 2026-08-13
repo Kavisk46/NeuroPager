@@ -13,13 +13,14 @@ from neuropager.utils.types import MemoryKey
 
 
 class LFUPolicy(PageReplacementPolicy):
-    """Evicts the least-frequently-accessed resident page."""
+    """Evicts the least-frequently-accessed resident page.
 
-    def __init__(self) -> None:
-        """Initialize the LFU policy with empty frequency tracking."""
-        # TODO(neuropager): back this with a frequency-count structure
-        # (e.g. min-heap or frequency buckets) for efficient victim
-        # selection.
+    Frequency state is not duplicated inside this policy: it is read
+    directly from :class:`~neuropager.core.page_table.PageTable`, which
+    already tracks a per-key cumulative access count for exactly this
+    purpose. Ties (equal access counts) are broken by the older
+    ``last_accessed_tick``, so victim selection stays fully deterministic.
+    """
 
     def select_victim(self, page_table: PageTable) -> MemoryKey:
         """Select the least-frequently-used resident key for eviction.
@@ -28,40 +29,44 @@ class LFUPolicy(PageReplacementPolicy):
             page_table: The page table to consult for residency and access
                 metadata.
 
+        Returns:
+            The resident key with the smallest access count, breaking ties
+            by the smallest (oldest) last-accessed tick.
+
         Raises:
-            NotImplementedError: Not yet implemented.
+            ValueError: If ``page_table`` has no resident pages.
         """
-        raise NotImplementedError
+        resident = page_table.resident_keys()
+        if not resident:
+            raise ValueError("cannot select a victim: no resident pages in working memory")
+
+        def sort_key(key: MemoryKey) -> tuple[int, int]:
+            entry = page_table.get_entry(key)
+            return (entry.access_count, entry.last_accessed_tick)
+
+        return min(resident, key=sort_key)
 
     def on_access(self, key: MemoryKey) -> None:
-        """Increment the access frequency counter for ``key``.
+        """No-op: access frequency is tracked by the page table.
+
+        Preserved for API stability and for future policies (e.g. the
+        planned learned Memory Utility Model) that require incremental
+        per-access state updates.
 
         Args:
             key: The logical memory identifier that was accessed.
-
-        Raises:
-            NotImplementedError: Not yet implemented.
         """
-        raise NotImplementedError
 
     def on_insert(self, key: MemoryKey) -> None:
-        """Register a newly resident page with an initial frequency count.
+        """No-op: initial frequency is tracked by the page table.
 
         Args:
             key: The logical memory identifier that was inserted.
-
-        Raises:
-            NotImplementedError: Not yet implemented.
         """
-        raise NotImplementedError
 
     def on_evict(self, key: MemoryKey) -> None:
-        """Remove ``key`` from frequency tracking.
+        """No-op: this policy holds no per-key state to clean up.
 
         Args:
             key: The logical memory identifier that was evicted.
-
-        Raises:
-            NotImplementedError: Not yet implemented.
         """
-        raise NotImplementedError
