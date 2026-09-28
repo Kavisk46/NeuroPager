@@ -14,6 +14,7 @@ dependency on the live memory-management objects that produced it.
 
 from __future__ import annotations
 
+import bisect
 from collections import defaultdict
 from collections.abc import Sequence
 from dataclasses import dataclass
@@ -133,6 +134,13 @@ class TraceReplay:
     def access_ticks_up_to(self, page_id: str, tick: int) -> list[int]:
         """Return ``page_id``'s ACCESS ticks at or before ``tick``.
 
+        ``self._access_ticks[page_id]`` is built by appending ticks in
+        trace order (see ``__init__``), and the trace's ticks are validated
+        non-decreasing, so it is already ascending -- a binary search for
+        the cutoff index returns exactly the same ticks a linear filter
+        would, just without rescanning every earlier, already-known-to-
+        qualify entry on every call.
+
         Args:
             page_id: The page to look up.
             tick: The inclusive upper bound.
@@ -140,11 +148,17 @@ class TraceReplay:
         Returns:
             Ascending ticks; empty if the page has no such history.
         """
-        return [t for t in self._access_ticks.get(page_id, []) if t <= tick]
+        ticks = self._access_ticks.get(page_id)
+        if not ticks:
+            return []
+        return ticks[: bisect.bisect_right(ticks, tick)]
 
     def fault_ticks_up_to(self, page_id: str, tick: int) -> list[int]:
         """Return ``page_id``'s PAGE_FAULT ticks at or before ``tick``.
 
+        See :meth:`access_ticks_up_to` for why a binary search is
+        equivalent to the linear filter it replaces.
+
         Args:
             page_id: The page to look up.
             tick: The inclusive upper bound.
@@ -152,7 +166,10 @@ class TraceReplay:
         Returns:
             Ascending ticks; empty if the page has no such history.
         """
-        return [t for t in self._fault_ticks.get(page_id, []) if t <= tick]
+        ticks = self._fault_ticks.get(page_id)
+        if not ticks:
+            return []
+        return ticks[: bisect.bisect_right(ticks, tick)]
 
     def full_access_ticks(self, page_id: str) -> list[int]:
         """Return every ACCESS tick ever recorded for ``page_id`` in this episode.

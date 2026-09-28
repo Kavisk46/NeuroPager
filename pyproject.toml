@@ -36,13 +36,16 @@ classifiers = [
     "Typing :: Typed",
 ]
 
-# NOTE: Dependencies are intentionally kept minimal. scikit-learn (and its
-# numpy/scipy transitive dependencies) is the first runtime dependency,
-# added for the Memory Utility Model experiment pipeline
-# (neuropager.experiment): logistic regression + gradient-boosted-tree
-# baselines, with no heavier ML framework pulled in.
+# NOTE: Dependencies are intentionally kept minimal. scikit-learn is the
+# first runtime dependency, added for the Memory Utility Model experiment
+# pipeline (neuropager.experiment): logistic regression + gradient-boosted-
+# tree baselines, with no heavier ML framework pulled in. scipy was already
+# present transitively via scikit-learn; it is declared explicitly because
+# scripts/generalization_experiment_2.py imports scipy.stats directly for
+# paired significance testing.
 dependencies = [
     "scikit-learn>=1.4",
+    "scipy>=1.10",
 ]
 
 [project.optional-dependencies]
@@ -111,6 +114,13 @@ explicit_package_bases = true
 # own code that uses it.
 [[tool.mypy.overrides]]
 module = "sklearn.*"
+ignore_missing_imports = true
+
+# Same rationale as sklearn above: scipy (used directly for paired
+# statistical tests in the experiment scripts) has no stub package
+# installed in this environment.
+[[tool.mypy.overrides]]
+module = "scipy.*"
 ignore_missing_imports = true
 
 [tool.pytest.ini_options]

@@ -69,16 +69,23 @@ class MemoryManager:
         """
         trace_logger = self.fault_handler.trace_logger
         resident_before: list[MemoryKey] = []
+        resident_snapshot: list[MemoryKey] | None = None
         if trace_logger is not None:
             trace_logger.begin_step()
             resident_before = self.page_table.resident_keys()
+            resident_snapshot = resident_before
 
         if self.page_table.is_resident(key):
             page = self.working_memory.get(key)
             self._record_hit(page)
             outcome = AccessOutcome.HIT
         else:
-            page = self.fault_handler.handle_fault(key)
+            # Reusing this snapshot (rather than letting handle_fault()
+            # recompute it) is safe: nothing between this line and
+            # handle_fault()'s own use of it changes any key's tier -- see
+            # PageFaultHandler.handle_fault()'s docstring for the full
+            # argument.
+            page = self.fault_handler.handle_fault(key, resident_snapshot=resident_snapshot)
             outcome = AccessOutcome.FAULT
 
         if trace_logger is not None:
@@ -111,9 +118,11 @@ class MemoryManager:
         """
         trace_logger = self.fault_handler.trace_logger
         resident_before: list[MemoryKey] = []
+        resident_snapshot: list[MemoryKey] | None = None
         if trace_logger is not None:
             trace_logger.begin_step()
             resident_before = self.page_table.resident_keys()
+            resident_snapshot = resident_before
 
         if self.page_table.is_resident(key):
             page = self.working_memory.get(key)
@@ -121,10 +130,14 @@ class MemoryManager:
             self._record_hit(page)
             outcome = AccessOutcome.HIT
         elif self.page_table.is_tracked(key):
-            self.fault_handler.install(create_page(key, value))
+            # Snapshot reuse is safe here too: is_resident()/is_tracked()
+            # above are pure reads, so nothing has changed any key's tier
+            # since resident_before was captured -- see
+            # PageFaultHandler.handle_fault()'s docstring.
+            self.fault_handler.install(create_page(key, value), resident_snapshot=resident_snapshot)
             outcome = AccessOutcome.REWRITE
         else:
-            self.fault_handler.install(create_page(key, value))
+            self.fault_handler.install(create_page(key, value), resident_snapshot=resident_snapshot)
             outcome = AccessOutcome.NEW
 
         if trace_logger is not None:
