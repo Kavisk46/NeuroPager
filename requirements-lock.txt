@@ -1,0 +1,25 @@
+# Exact runtime dependency versions for generalization-experiment-2,
+# pinned from the machine that produced the 16 existing checkpoints
+# (config_hash 2d4e3f4f40f07b8a2b584d33b9496addb563addd8a99d66dd1d77ee25ba079f3).
+#
+# No lockfile (uv.lock / poetry.lock / requirements*.txt) previously existed
+# in this repo. This is NOT a `pip freeze` of the development machine's
+# Python environment -- that environment is a large shared/global install
+# with 150+ unrelated packages (torch, tensorflow, jupyter, streamlit,
+# transformers, etc.) pulled in by other projects, and freezing all of it
+# would force the VM to download several GB of packages generalization_
+# experiment_2.py never imports. This list is scoped to exactly what
+# scripts/generalization_experiment_2.py and every module under
+# src/neuropager/ actually import (verified by grepping every import
+# statement in both): numpy, scipy, scikit-learn -- pyproject.toml's own
+# declared runtime dependencies -- plus scikit-learn's own two direct
+# runtime dependencies (joblib, threadpoolctl), plus psutil, used only by
+# this repo's diagnostic/monitoring scripts (not by the experiment itself,
+# so not correctness-critical, but installed for RSS monitoring during
+# the run).
+numpy==2.0.2
+scipy==1.14.1
+scikit-learn==1.5.2
+joblib==1.4.2
+threadpoolctl==3.5.0
+psutil==6.1.0
