@@ -1,0 +1,519 @@
+{
+  "config_hash": "96dae5f6bc9133351c5bd4e00fdbfb756fa4d113b28442e461a68c752a2cc702",
+  "held_out_family": "A_uniform_random",
+  "horizon": 50,
+  "protocol": "B",
+  "result": {
+    "belady_gaps": {
+      "FIFO": {
+        "A_uniform_random-ep-0": 0.7568238213399504,
+        "A_uniform_random-ep-1": 0.7390776699029126,
+        "A_uniform_random-ep-2": 0.7270501835985312,
+        "A_uniform_random-ep-3": 0.7867001254705144
+      },
+      "LFU": {
+        "A_uniform_random-ep-0": 0.7866004962779156,
+        "A_uniform_random-ep-1": 0.779126213592233,
+        "A_uniform_random-ep-2": 0.7405140758873929,
+        "A_uniform_random-ep-3": 0.7754077791718946
+      },
+      "LRU": {
+        "A_uniform_random-ep-0": 0.7456575682382134,
+        "A_uniform_random-ep-1": 0.7366504854368932,
+        "A_uniform_random-ep-2": 0.7441860465116279,
+        "A_uniform_random-ep-3": 0.7779171894604768
+      },
+      "Learned": {
+        "A_uniform_random-ep-0": 0.7667493796526055,
+        "A_uniform_random-ep-1": 0.7803398058252428,
+        "A_uniform_random-ep-2": 0.7294981640146879,
+        "A_uniform_random-ep-3": 0.7741530740276035
+      },
+      "Random_mean": {
+        "A_uniform_random-ep-0": 0.7543424317617866,
+        "A_uniform_random-ep-1": 0.7645631067961165,
+        "A_uniform_random-ep-2": 0.7662178702570379,
+        "A_uniform_random-ep-3": 0.7754077791718946
+      }
+    },
+    "classical_policy_faults": {
+      "A_uniform_random-ep-0": {
+        "Belady_MIN": {
+          "decision_latency_mean_s": 9.985081967778435e-05,
+          "decision_latency_std_s": 0.0006611883030227943,
+          "hit_ratio": 0.597,
+          "hits": 1194,
+          "page_faults": 806,
+          "total_references": 2000
+        },
+        "FIFO": {
+          "decision_latency_mean_s": 0.00013589262293663907,
+          "decision_latency_std_s": 0.001662032271531724,
+          "hit_ratio": 0.292,
+          "hits": 584,
+          "page_faults": 1416,
+          "total_references": 2000
+        },
+        "LFU": {
+          "decision_latency_mean_s": 0.00011164119622826645,
+          "decision_latency_std_s": 0.0010989340485242044,
+          "hit_ratio": 0.28,
+          "hits": 560,
+          "page_faults": 1440,
+          "total_references": 2000
+        },
+        "LRU": {
+          "decision_latency_mean_s": 0.00012321113403938064,
+          "decision_latency_std_s": 0.0012736532051012782,
+          "hit_ratio": 0.2965,
+          "hits": 593,
+          "page_faults": 1407,
+          "total_references": 2000
+        },
+        "Random_seed0": {
+          "decision_latency_mean_s": 5.183837209712957e-05,
+          "decision_latency_std_s": 0.0005246964829253961,
+          "hit_ratio": 0.293,
+          "hits": 586,
+          "page_faults": 1414,
+          "total_references": 2000
+        }
+      },
+      "A_uniform_random-ep-1": {
+        "Belady_MIN": {
+          "decision_latency_mean_s": 0.0001259766055204428,
+          "decision_latency_std_s": 0.0010523201449110105,
+          "hit_ratio": 0.588,
+          "hits": 1176,
+          "page_faults": 824,
+          "total_references": 2000
+        },
+        "FIFO": {
+          "decision_latency_mean_s": 0.00011676326805632075,
+          "decision_latency_std_s": 0.0011178607204834138,
+          "hit_ratio": 0.2835,
+          "hits": 567,
+          "page_faults": 1433,
+          "total_references": 2000
+        },
+        "LFU": {
+          "decision_latency_mean_s": 0.00019751063407009935,
+          "decision_latency_std_s": 0.0019426804076023174,
+          "hit_ratio": 0.267,
+          "hits": 534,
+          "page_faults": 1466,
+          "total_references": 2000
+        },
+        "LRU": {
+          "decision_latency_mean_s": 0.00010430561192284012,
+          "decision_latency_std_s": 0.001367543569653259,
+          "hit_ratio": 0.2845,
+          "hits": 569,
+          "page_faults": 1431,
+          "total_references": 2000
+        },
+        "Random_seed0": {
+          "decision_latency_mean_s": 5.193508656633731e-05,
+          "decision_latency_std_s": 0.0005832702795444959,
+          "hit_ratio": 0.273,
+          "hits": 546,
+          "page_faults": 1454,
+          "total_references": 2000
+        }
+      },
+      "A_uniform_random-ep-2": {
+        "Belady_MIN": {
+          "decision_latency_mean_s": 6.597098267065715e-05,
+          "decision_latency_std_s": 0.0005084589810349173,
+          "hit_ratio": 0.5915,
+          "hits": 1183,
+          "page_faults": 817,
+          "total_references": 2000
+        },
+        "FIFO": {
+          "decision_latency_mean_s": 6.373200824927788e-05,
+          "decision_latency_std_s": 0.0005930632072982736,
+          "hit_ratio": 0.2945,
+          "hits": 589,
+          "page_faults": 1411,
+          "total_references": 2000
+        },
+        "LFU": {
+          "decision_latency_mean_s": 0.00010013945579792525,
+          "decision_latency_std_s": 0.0012318528302278856,
+          "hit_ratio": 0.289,
+          "hits": 578,
+          "page_faults": 1422,
+          "total_references": 2000
+        },
+        "LRU": {
+          "decision_latency_mean_s": 0.00010855118805733235,
+          "decision_latency_std_s": 0.0009845053779430402,
+          "hit_ratio": 0.2875,
+          "hits": 575,
+          "page_faults": 1425,
+          "total_references": 2000
+        },
+        "Random_seed0": {
+          "decision_latency_mean_s": 5.4893896704918575e-05,
+          "decision_latency_std_s": 0.0006492210167435646,
+          "hit_ratio": 0.2785,
+          "hits": 557,
+          "page_faults": 1443,
+          "total_references": 2000
+        }
+      },
+      "A_uniform_random-ep-3": {
+        "Belady_MIN": {
+          "decision_latency_mean_s": 8.75319526684932e-05,
+          "decision_latency_std_s": 0.0005517709063652174,
+          "hit_ratio": 0.6015,
+          "hits": 1203,
+          "page_faults": 797,
+          "total_references": 2000
+        },
+        "FIFO": {
+          "decision_latency_mean_s": 5.9257201089819674e-05,
+          "decision_latency_std_s": 0.0005119103273841012,
+          "hit_ratio": 0.288,
+          "hits": 576,
+          "page_faults": 1424,
+          "total_references": 2000
+        },
+        "LFU": {
+          "decision_latency_mean_s": 4.163622694151857e-05,
+          "decision_latency_std_s": 0.0003521001204089582,
+          "hit_ratio": 0.2925,
+          "hits": 585,
+          "page_faults": 1415,
+          "total_references": 2000
+        },
+        "LRU": {
+          "decision_latency_mean_s": 8.028798633253674e-05,
+          "decision_latency_std_s": 0.0007654189545594528,
+          "hit_ratio": 0.2915,
+          "hits": 583,
+          "page_faults": 1417,
+          "total_references": 2000
+        },
+        "Random_seed0": {
+          "decision_latency_mean_s": 8.593677377435162e-05,
+          "decision_latency_std_s": 0.0009036202354746765,
+          "hit_ratio": 0.2925,
+          "hits": 585,
+          "page_faults": 1415,
+          "total_references": 2000
+        }
+      }
+    },
+    "flags": [],
+    "learned_policy_faults": {
+      "A_uniform_random-ep-0": {
+        "decision_latency_mean_s": 0.004491714198359229,
+        "decision_latency_std_s": 0.0047287226743274536,
+        "hit_ratio": 0.288,
+        "hits": 576,
+        "page_faults": 1424,
+        "total_references": 2000
+      },
+      "A_uniform_random-ep-1": {
+        "decision_latency_mean_s": 0.0061961952475102595,
+        "decision_latency_std_s": 0.007182347365371039,
+        "hit_ratio": 0.2665,
+        "hits": 533,
+        "page_faults": 1467,
+        "total_references": 2000
+      },
+      "A_uniform_random-ep-2": {
+        "decision_latency_mean_s": 0.007495951471598914,
+        "decision_latency_std_s": 0.013861549102822016,
+        "hit_ratio": 0.2935,
+        "hits": 587,
+        "page_faults": 1413,
+        "total_references": 2000
+      },
+      "A_uniform_random-ep-3": {
+        "decision_latency_mean_s": 0.004601695964434632,
+        "decision_latency_std_s": 0.004689361683073633,
+        "hit_ratio": 0.293,
+        "hits": 586,
+        "page_faults": 1414,
+        "total_references": 2000
+      }
+    },
+    "models": {
+      "hist_gradient_boosting": {
+        "status": "trained",
+        "test_metrics": {
+          "accuracy": 0.5322185797002725,
+          "brier_score": 0.38731486905252205,
+          "calibration_curve": [
+            [
+              0.41259631728998064,
+              0.5266854679934018
+            ],
+            [
+              0.8323251006453448,
+              0.5372120958896955
+            ],
+            [
+              0.9284373737668301,
+              0.5485007862061487
+            ],
+            [
+              0.9609754356414865,
+              0.5315347783555578
+            ],
+            [
+              0.9819962126062527,
+              0.5404496858811859
+            ]
+          ],
+          "f1": 0.6726794718065972,
+          "n_examples": 93952,
+          "n_negative": 43521,
+          "n_positive": 50431,
+          "pr_auc": 0.5366874215418733,
+          "precision": 0.5386578878312936,
+          "recall": 0.8954809541750114,
+          "roc_auc": 0.5029984517307686
+        },
+        "train_metrics": {
+          "accuracy": 1.0,
+          "brier_score": 0.023066508573373588,
+          "calibration_curve": [
+            [
+              0.008482862342621994,
+              0.0
+            ],
+            [
+              0.07250574259159283,
+              0.0
+            ],
+            [
+              0.3824135123637651,
+              0.3142857142857143
+            ],
+            [
+              0.8834208376181462,
+              1.0
+            ],
+            [
+              0.9671622288682039,
+              1.0
+            ]
+          ],
+          "f1": 1.0,
+          "n_examples": 176,
+          "n_negative": 95,
+          "n_positive": 81,
+          "pr_auc": 1.0000000000000002,
+          "precision": 1.0,
+          "recall": 1.0,
+          "roc_auc": 1.0
+        },
+        "val_metrics": {
+          "accuracy": 0.7125,
+          "brier_score": 0.24964961159044968,
+          "calibration_curve": [
+            [
+              0.006935079673988624,
+              0.25
+            ],
+            [
+              0.060872615365650515,
+              0.375
+            ],
+            [
+              0.3183031677104164,
+              0.1875
+            ],
+            [
+              0.7576583208629296,
+              0.875
+            ],
+            [
+              0.939048462244496,
+              0.625
+            ]
+          ],
+          "f1": 0.676056338028169,
+          "n_examples": 80,
+          "n_negative": 43,
+          "n_positive": 37,
+          "pr_auc": 0.5944495893476426,
+          "precision": 0.7058823529411765,
+          "recall": 0.6486486486486487,
+          "roc_auc": 0.6851037083595224
+        }
+      },
+      "logistic_regression": {
+        "status": "trained",
+        "test_metrics": {
+          "accuracy": 0.5208830040871935,
+          "brier_score": 0.4444447032037827,
+          "calibration_curve": [
+            [
+              0.06758710353875376,
+              0.5357351923793305
+            ],
+            [
+              0.7907538610213782,
+              0.5406599254922831
+            ],
+            [
+              0.999592141080041,
+              0.5525279403938265
+            ],
+            [
+              0.9999998141195238,
+              0.5376263970196913
+            ],
+            [
+              0.9999999999414745,
+              0.5173221222925869
+            ]
+          ],
+          "f1": 0.6326527281333137,
+          "n_examples": 93952,
+          "n_negative": 43521,
+          "n_positive": 50431,
+          "pr_auc": 0.5272192456128703,
+          "precision": 0.5375622339023951,
+          "recall": 0.7686145426424223,
+          "roc_auc": 0.4932998002520541
+        },
+        "train_metrics": {
+          "accuracy": 0.7727272727272727,
+          "brier_score": 0.15499589020645962,
+          "calibration_curve": [
+            [
+              0.07856662316077641,
+              0.08333333333333333
+            ],
+            [
+              0.2716680303220696,
+              0.17142857142857143
+            ],
+            [
+              0.4216871773159691,
+              0.4857142857142857
+            ],
+            [
+              0.6380565724859086,
+              0.6857142857142857
+            ],
+            [
+              0.9020592136680233,
+              0.8857142857142857
+            ]
+          ],
+          "f1": 0.7402597402597403,
+          "n_examples": 176,
+          "n_negative": 95,
+          "n_positive": 81,
+          "pr_auc": 0.837760876550655,
+          "precision": 0.7808219178082192,
+          "recall": 0.7037037037037037,
+          "roc_auc": 0.8614684860298896
+        },
+        "val_metrics": {
+          "accuracy": 0.75,
+          "brier_score": 0.1829554363665729,
+          "calibration_curve": [
+            [
+              0.0673483477245241,
+              0.0
+            ],
+            [
+              0.25085243562626464,
+              0.3125
+            ],
+            [
+              0.3664398414724188,
+              0.4375
+            ],
+            [
+              0.6515407071856575,
+              0.9375
+            ],
+            [
+              0.8995909920329312,
+              0.625
+            ]
+          ],
+          "f1": 0.7058823529411765,
+          "n_examples": 80,
+          "n_negative": 43,
+          "n_positive": 37,
+          "pr_auc": 0.7089158843771256,
+          "precision": 0.7741935483870968,
+          "recall": 0.6486486486486487,
+          "roc_auc": 0.8108108108108107
+        }
+      }
+    },
+    "n_test_examples": 93952,
+    "n_train_examples": 176,
+    "n_val_examples": 80,
+    "paired_comparisons_vs_learned": {
+      "Learned_vs_Belady_MIN": {
+        "ci_95_high": 649.0939980701463,
+        "ci_95_low": 587.9060019298537,
+        "interpretation": "negative mean_diff means the learned policy had FEWER faults (better) than the comparison policy",
+        "mean_diff": 618.5,
+        "n_episodes": 4,
+        "paired_ttest_pvalue": 8.273694939389753e-06,
+        "paired_ttest_statistic": 64.33755520626228,
+        "std_diff": 19.226717521892983,
+        "wilcoxon_pvalue": 0.125
+      },
+      "Learned_vs_FIFO": {
+        "ci_95_high": 38.05565828938691,
+        "ci_95_low": -21.055658289386916,
+        "interpretation": "negative mean_diff means the learned policy had FEWER faults (better) than the comparison policy",
+        "mean_diff": 8.5,
+        "n_episodes": 4,
+        "paired_ttest_pvalue": 0.4275509392764042,
+        "paired_ttest_statistic": 0.9152492334988814,
+        "std_diff": 18.57417562100671,
+        "wilcoxon_pvalue": 0.625
+      },
+      "Learned_vs_LFU": {
+        "ci_95_high": 6.1693582423425095,
+        "ci_95_low": -18.66935824234251,
+        "interpretation": "negative mean_diff means the learned policy had FEWER faults (better) than the comparison policy",
+        "mean_diff": -6.25,
+        "n_episodes": 4,
+        "paired_ttest_pvalue": 0.20757219829798515,
+        "paired_ttest_statistic": -1.6015553315961828,
+        "std_diff": 7.804912982645397,
+        "wilcoxon_pvalue": 0.375
+      },
+      "Learned_vs_LRU": {
+        "ci_95_high": 43.59081877530229,
+        "ci_95_low": -24.59081877530229,
+        "interpretation": "negative mean_diff means the learned policy had FEWER faults (better) than the comparison policy",
+        "mean_diff": 9.5,
+        "n_episodes": 4,
+        "paired_ttest_pvalue": 0.4404843841316348,
+        "paired_ttest_statistic": 0.8868440532177395,
+        "std_diff": 21.42428528562855,
+        "wilcoxon_pvalue": 0.625
+      },
+      "Learned_vs_Random": {
+        "ci_95_high": 29.20853384474636,
+        "ci_95_low": -33.208533844746356,
+        "interpretation": "negative mean_diff means the learned policy had FEWER faults (better) than the comparison policy",
+        "mean_diff": -2.0,
+        "n_episodes": 4,
+        "paired_ttest_pvalue": 0.8514460653135223,
+        "paired_ttest_statistic": -0.2039471845179293,
+        "std_diff": 19.61292091114087,
+        "wilcoxon_pvalue": 1.0
+      }
+    },
+    "selected_model": "logistic_regression"
+  },
+  "schema_version": "2"
+}

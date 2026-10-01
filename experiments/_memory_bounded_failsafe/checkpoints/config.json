@@ -1,0 +1,78 @@
+{
+  "config": {
+    "checkpoint_schema_version": "2",
+    "episode_length": 2000,
+    "episodes_per_family": 4,
+    "families": [
+      "A_uniform_random",
+      "B_temporal_locality"
+    ],
+    "family_params": {
+      "A_uniform_random": {
+        "key_space": 64
+      },
+      "B_temporal_locality": {
+        "key_space": 64,
+        "locality": 0.3
+      }
+    },
+    "feature_order": [
+      "recency",
+      "frequency",
+      "avg_inter_access_interval",
+      "inter_access_interval_variance",
+      "fault_count",
+      "fault_ratio",
+      "page_age",
+      "recent_burst",
+      "long_burst",
+      "recent_interval",
+      "normalized_recency",
+      "elapsed_since_fault",
+      "max_historical_interval"
+    ],
+    "horizons": [
+      50
+    ],
+    "imbalanced_families": [
+      "B_temporal_locality",
+      "C_bursty"
+    ],
+    "model_names": [
+      "hist_gradient_boosting",
+      "logistic_regression"
+    ],
+    "random_seeds": [
+      0
+    ],
+    "redundant_horizon_pairs": {
+      "D_long_range_reuse": [
+        200,
+        500
+      ],
+      "E_phase_changing": [
+        200,
+        500
+      ]
+    },
+    "structural_null_conditions": [
+      [
+        "D_long_range_reuse",
+        25
+      ],
+      [
+        "D_long_range_reuse",
+        50
+      ],
+      [
+        "D_long_range_reuse",
+        100
+      ]
+    ],
+    "train_seed": 0,
+    "working_memory_capacity": 16
+  },
+  "config_hash": "96dae5f6bc9133351c5bd4e00fdbfb756fa4d113b28442e461a68c752a2cc702",
+  "schema_version": "2",
+  "written_at": "2026-09-01T17:42:26.713217+00:00"
+}

@@ -1,0 +1,1044 @@
+{
+  "A_uniform_random": {
+    "held_out_family": "A_uniform_random",
+    "horizons": {
+      "50": {
+        "belady_gaps": {
+          "FIFO": {
+            "A_uniform_random-ep-0": 0.7568238213399504,
+            "A_uniform_random-ep-1": 0.7390776699029126,
+            "A_uniform_random-ep-2": 0.7270501835985312,
+            "A_uniform_random-ep-3": 0.7867001254705144
+          },
+          "LFU": {
+            "A_uniform_random-ep-0": 0.7866004962779156,
+            "A_uniform_random-ep-1": 0.779126213592233,
+            "A_uniform_random-ep-2": 0.7405140758873929,
+            "A_uniform_random-ep-3": 0.7754077791718946
+          },
+          "LRU": {
+            "A_uniform_random-ep-0": 0.7456575682382134,
+            "A_uniform_random-ep-1": 0.7366504854368932,
+            "A_uniform_random-ep-2": 0.7441860465116279,
+            "A_uniform_random-ep-3": 0.7779171894604768
+          },
+          "Learned": {
+            "A_uniform_random-ep-0": 0.7667493796526055,
+            "A_uniform_random-ep-1": 0.7803398058252428,
+            "A_uniform_random-ep-2": 0.7294981640146879,
+            "A_uniform_random-ep-3": 0.7741530740276035
+          },
+          "Random_mean": {
+            "A_uniform_random-ep-0": 0.7543424317617866,
+            "A_uniform_random-ep-1": 0.7645631067961165,
+            "A_uniform_random-ep-2": 0.7662178702570379,
+            "A_uniform_random-ep-3": 0.7754077791718946
+          }
+        },
+        "classical_policy_faults": {
+          "A_uniform_random-ep-0": {
+            "Belady_MIN": {
+              "decision_latency_mean_s": 9.985081967778435e-05,
+              "decision_latency_std_s": 0.0006611883030227943,
+              "hit_ratio": 0.597,
+              "hits": 1194,
+              "page_faults": 806,
+              "total_references": 2000
+            },
+            "FIFO": {
+              "decision_latency_mean_s": 0.00013589262293663907,
+              "decision_latency_std_s": 0.001662032271531724,
+              "hit_ratio": 0.292,
+              "hits": 584,
+              "page_faults": 1416,
+              "total_references": 2000
+            },
+            "LFU": {
+              "decision_latency_mean_s": 0.00011164119622826645,
+              "decision_latency_std_s": 0.0010989340485242044,
+              "hit_ratio": 0.28,
+              "hits": 560,
+              "page_faults": 1440,
+              "total_references": 2000
+            },
+            "LRU": {
+              "decision_latency_mean_s": 0.00012321113403938064,
+              "decision_latency_std_s": 0.0012736532051012782,
+              "hit_ratio": 0.2965,
+              "hits": 593,
+              "page_faults": 1407,
+              "total_references": 2000
+            },
+            "Random_seed0": {
+              "decision_latency_mean_s": 5.183837209712957e-05,
+              "decision_latency_std_s": 0.0005246964829253961,
+              "hit_ratio": 0.293,
+              "hits": 586,
+              "page_faults": 1414,
+              "total_references": 2000
+            }
+          },
+          "A_uniform_random-ep-1": {
+            "Belady_MIN": {
+              "decision_latency_mean_s": 0.0001259766055204428,
+              "decision_latency_std_s": 0.0010523201449110105,
+              "hit_ratio": 0.588,
+              "hits": 1176,
+              "page_faults": 824,
+              "total_references": 2000
+            },
+            "FIFO": {
+              "decision_latency_mean_s": 0.00011676326805632075,
+              "decision_latency_std_s": 0.0011178607204834138,
+              "hit_ratio": 0.2835,
+              "hits": 567,
+              "page_faults": 1433,
+              "total_references": 2000
+            },
+            "LFU": {
+              "decision_latency_mean_s": 0.00019751063407009935,
+              "decision_latency_std_s": 0.0019426804076023174,
+              "hit_ratio": 0.267,
+              "hits": 534,
+              "page_faults": 1466,
+              "total_references": 2000
+            },
+            "LRU": {
+              "decision_latency_mean_s": 0.00010430561192284012,
+              "decision_latency_std_s": 0.001367543569653259,
+              "hit_ratio": 0.2845,
+              "hits": 569,
+              "page_faults": 1431,
+              "total_references": 2000
+            },
+            "Random_seed0": {
+              "decision_latency_mean_s": 5.193508656633731e-05,
+              "decision_latency_std_s": 0.0005832702795444959,
+              "hit_ratio": 0.273,
+              "hits": 546,
+              "page_faults": 1454,
+              "total_references": 2000
+            }
+          },
+          "A_uniform_random-ep-2": {
+            "Belady_MIN": {
+              "decision_latency_mean_s": 6.597098267065715e-05,
+              "decision_latency_std_s": 0.0005084589810349173,
+              "hit_ratio": 0.5915,
+              "hits": 1183,
+              "page_faults": 817,
+              "total_references": 2000
+            },
+            "FIFO": {
+              "decision_latency_mean_s": 6.373200824927788e-05,
+              "decision_latency_std_s": 0.0005930632072982736,
+              "hit_ratio": 0.2945,
+              "hits": 589,
+              "page_faults": 1411,
+              "total_references": 2000
+            },
+            "LFU": {
+              "decision_latency_mean_s": 0.00010013945579792525,
+              "decision_latency_std_s": 0.0012318528302278856,
+              "hit_ratio": 0.289,
+              "hits": 578,
+              "page_faults": 1422,
+              "total_references": 2000
+            },
+            "LRU": {
+              "decision_latency_mean_s": 0.00010855118805733235,
+              "decision_latency_std_s": 0.0009845053779430402,
+              "hit_ratio": 0.2875,
+              "hits": 575,
+              "page_faults": 1425,
+              "total_references": 2000
+            },
+            "Random_seed0": {
+              "decision_latency_mean_s": 5.4893896704918575e-05,
+              "decision_latency_std_s": 0.0006492210167435646,
+              "hit_ratio": 0.2785,
+              "hits": 557,
+              "page_faults": 1443,
+              "total_references": 2000
+            }
+          },
+          "A_uniform_random-ep-3": {
+            "Belady_MIN": {
+              "decision_latency_mean_s": 8.75319526684932e-05,
+              "decision_latency_std_s": 0.0005517709063652174,
+              "hit_ratio": 0.6015,
+              "hits": 1203,
+              "page_faults": 797,
+              "total_references": 2000
+            },
+            "FIFO": {
+              "decision_latency_mean_s": 5.9257201089819674e-05,
+              "decision_latency_std_s": 0.0005119103273841012,
+              "hit_ratio": 0.288,
+              "hits": 576,
+              "page_faults": 1424,
+              "total_references": 2000
+            },
+            "LFU": {
+              "decision_latency_mean_s": 4.163622694151857e-05,
+              "decision_latency_std_s": 0.0003521001204089582,
+              "hit_ratio": 0.2925,
+              "hits": 585,
+              "page_faults": 1415,
+              "total_references": 2000
+            },
+            "LRU": {
+              "decision_latency_mean_s": 8.028798633253674e-05,
+              "decision_latency_std_s": 0.0007654189545594528,
+              "hit_ratio": 0.2915,
+              "hits": 583,
+              "page_faults": 1417,
+              "total_references": 2000
+            },
+            "Random_seed0": {
+              "decision_latency_mean_s": 8.593677377435162e-05,
+              "decision_latency_std_s": 0.0009036202354746765,
+              "hit_ratio": 0.2925,
+              "hits": 585,
+              "page_faults": 1415,
+              "total_references": 2000
+            }
+          }
+        },
+        "flags": [],
+        "learned_policy_faults": {
+          "A_uniform_random-ep-0": {
+            "decision_latency_mean_s": 0.004491714198359229,
+            "decision_latency_std_s": 0.0047287226743274536,
+            "hit_ratio": 0.288,
+            "hits": 576,
+            "page_faults": 1424,
+            "total_references": 2000
+          },
+          "A_uniform_random-ep-1": {
+            "decision_latency_mean_s": 0.0061961952475102595,
+            "decision_latency_std_s": 0.007182347365371039,
+            "hit_ratio": 0.2665,
+            "hits": 533,
+            "page_faults": 1467,
+            "total_references": 2000
+          },
+          "A_uniform_random-ep-2": {
+            "decision_latency_mean_s": 0.007495951471598914,
+            "decision_latency_std_s": 0.013861549102822016,
+            "hit_ratio": 0.2935,
+            "hits": 587,
+            "page_faults": 1413,
+            "total_references": 2000
+          },
+          "A_uniform_random-ep-3": {
+            "decision_latency_mean_s": 0.004601695964434632,
+            "decision_latency_std_s": 0.004689361683073633,
+            "hit_ratio": 0.293,
+            "hits": 586,
+            "page_faults": 1414,
+            "total_references": 2000
+          }
+        },
+        "models": {
+          "hist_gradient_boosting": {
+            "status": "trained",
+            "test_metrics": {
+              "accuracy": 0.5322185797002725,
+              "brier_score": 0.38731486905252205,
+              "calibration_curve": [
+                [
+                  0.41259631728998064,
+                  0.5266854679934018
+                ],
+                [
+                  0.8323251006453448,
+                  0.5372120958896955
+                ],
+                [
+                  0.9284373737668301,
+                  0.5485007862061487
+                ],
+                [
+                  0.9609754356414865,
+                  0.5315347783555578
+                ],
+                [
+                  0.9819962126062527,
+                  0.5404496858811859
+                ]
+              ],
+              "f1": 0.6726794718065972,
+              "n_examples": 93952,
+              "n_negative": 43521,
+              "n_positive": 50431,
+              "pr_auc": 0.5366874215418733,
+              "precision": 0.5386578878312936,
+              "recall": 0.8954809541750114,
+              "roc_auc": 0.5029984517307686
+            },
+            "train_metrics": {
+              "accuracy": 1.0,
+              "brier_score": 0.023066508573373588,
+              "calibration_curve": [
+                [
+                  0.008482862342621994,
+                  0.0
+                ],
+                [
+                  0.07250574259159283,
+                  0.0
+                ],
+                [
+                  0.3824135123637651,
+                  0.3142857142857143
+                ],
+                [
+                  0.8834208376181462,
+                  1.0
+                ],
+                [
+                  0.9671622288682039,
+                  1.0
+                ]
+              ],
+              "f1": 1.0,
+              "n_examples": 176,
+              "n_negative": 95,
+              "n_positive": 81,
+              "pr_auc": 1.0000000000000002,
+              "precision": 1.0,
+              "recall": 1.0,
+              "roc_auc": 1.0
+            },
+            "val_metrics": {
+              "accuracy": 0.7125,
+              "brier_score": 0.24964961159044968,
+              "calibration_curve": [
+                [
+                  0.006935079673988624,
+                  0.25
+                ],
+                [
+                  0.060872615365650515,
+                  0.375
+                ],
+                [
+                  0.3183031677104164,
+                  0.1875
+                ],
+                [
+                  0.7576583208629296,
+                  0.875
+                ],
+                [
+                  0.939048462244496,
+                  0.625
+                ]
+              ],
+              "f1": 0.676056338028169,
+              "n_examples": 80,
+              "n_negative": 43,
+              "n_positive": 37,
+              "pr_auc": 0.5944495893476426,
+              "precision": 0.7058823529411765,
+              "recall": 0.6486486486486487,
+              "roc_auc": 0.6851037083595224
+            }
+          },
+          "logistic_regression": {
+            "status": "trained",
+            "test_metrics": {
+              "accuracy": 0.5208830040871935,
+              "brier_score": 0.4444447032037827,
+              "calibration_curve": [
+                [
+                  0.06758710353875376,
+                  0.5357351923793305
+                ],
+                [
+                  0.7907538610213782,
+                  0.5406599254922831
+                ],
+                [
+                  0.999592141080041,
+                  0.5525279403938265
+                ],
+                [
+                  0.9999998141195238,
+                  0.5376263970196913
+                ],
+                [
+                  0.9999999999414745,
+                  0.5173221222925869
+                ]
+              ],
+              "f1": 0.6326527281333137,
+              "n_examples": 93952,
+              "n_negative": 43521,
+              "n_positive": 50431,
+              "pr_auc": 0.5272192456128703,
+              "precision": 0.5375622339023951,
+              "recall": 0.7686145426424223,
+              "roc_auc": 0.4932998002520541
+            },
+            "train_metrics": {
+              "accuracy": 0.7727272727272727,
+              "brier_score": 0.15499589020645962,
+              "calibration_curve": [
+                [
+                  0.07856662316077641,
+                  0.08333333333333333
+                ],
+                [
+                  0.2716680303220696,
+                  0.17142857142857143
+                ],
+                [
+                  0.4216871773159691,
+                  0.4857142857142857
+                ],
+                [
+                  0.6380565724859086,
+                  0.6857142857142857
+                ],
+                [
+                  0.9020592136680233,
+                  0.8857142857142857
+                ]
+              ],
+              "f1": 0.7402597402597403,
+              "n_examples": 176,
+              "n_negative": 95,
+              "n_positive": 81,
+              "pr_auc": 0.837760876550655,
+              "precision": 0.7808219178082192,
+              "recall": 0.7037037037037037,
+              "roc_auc": 0.8614684860298896
+            },
+            "val_metrics": {
+              "accuracy": 0.75,
+              "brier_score": 0.1829554363665729,
+              "calibration_curve": [
+                [
+                  0.0673483477245241,
+                  0.0
+                ],
+                [
+                  0.25085243562626464,
+                  0.3125
+                ],
+                [
+                  0.3664398414724188,
+                  0.4375
+                ],
+                [
+                  0.6515407071856575,
+                  0.9375
+                ],
+                [
+                  0.8995909920329312,
+                  0.625
+                ]
+              ],
+              "f1": 0.7058823529411765,
+              "n_examples": 80,
+              "n_negative": 43,
+              "n_positive": 37,
+              "pr_auc": 0.7089158843771256,
+              "precision": 0.7741935483870968,
+              "recall": 0.6486486486486487,
+              "roc_auc": 0.8108108108108107
+            }
+          }
+        },
+        "n_test_examples": 93952,
+        "n_train_examples": 176,
+        "n_val_examples": 80,
+        "paired_comparisons_vs_learned": {
+          "Learned_vs_Belady_MIN": {
+            "ci_95_high": 649.0939980701463,
+            "ci_95_low": 587.9060019298537,
+            "interpretation": "negative mean_diff means the learned policy had FEWER faults (better) than the comparison policy",
+            "mean_diff": 618.5,
+            "n_episodes": 4,
+            "paired_ttest_pvalue": 8.273694939389753e-06,
+            "paired_ttest_statistic": 64.33755520626228,
+            "std_diff": 19.226717521892983,
+            "wilcoxon_pvalue": 0.125
+          },
+          "Learned_vs_FIFO": {
+            "ci_95_high": 38.05565828938691,
+            "ci_95_low": -21.055658289386916,
+            "interpretation": "negative mean_diff means the learned policy had FEWER faults (better) than the comparison policy",
+            "mean_diff": 8.5,
+            "n_episodes": 4,
+            "paired_ttest_pvalue": 0.4275509392764042,
+            "paired_ttest_statistic": 0.9152492334988814,
+            "std_diff": 18.57417562100671,
+            "wilcoxon_pvalue": 0.625
+          },
+          "Learned_vs_LFU": {
+            "ci_95_high": 6.1693582423425095,
+            "ci_95_low": -18.66935824234251,
+            "interpretation": "negative mean_diff means the learned policy had FEWER faults (better) than the comparison policy",
+            "mean_diff": -6.25,
+            "n_episodes": 4,
+            "paired_ttest_pvalue": 0.20757219829798515,
+            "paired_ttest_statistic": -1.6015553315961828,
+            "std_diff": 7.804912982645397,
+            "wilcoxon_pvalue": 0.375
+          },
+          "Learned_vs_LRU": {
+            "ci_95_high": 43.59081877530229,
+            "ci_95_low": -24.59081877530229,
+            "interpretation": "negative mean_diff means the learned policy had FEWER faults (better) than the comparison policy",
+            "mean_diff": 9.5,
+            "n_episodes": 4,
+            "paired_ttest_pvalue": 0.4404843841316348,
+            "paired_ttest_statistic": 0.8868440532177395,
+            "std_diff": 21.42428528562855,
+            "wilcoxon_pvalue": 0.625
+          },
+          "Learned_vs_Random": {
+            "ci_95_high": 29.20853384474636,
+            "ci_95_low": -33.208533844746356,
+            "interpretation": "negative mean_diff means the learned policy had FEWER faults (better) than the comparison policy",
+            "mean_diff": -2.0,
+            "n_episodes": 4,
+            "paired_ttest_pvalue": 0.8514460653135223,
+            "paired_ttest_statistic": -0.2039471845179293,
+            "std_diff": 19.61292091114087,
+            "wilcoxon_pvalue": 1.0
+          }
+        },
+        "selected_model": "logistic_regression"
+      }
+    },
+    "n_test_episodes": 4,
+    "n_train_episodes": 3,
+    "n_val_episodes": 1
+  },
+  "B_temporal_locality": {
+    "held_out_family": "B_temporal_locality",
+    "horizons": {
+      "50": {
+        "belady_gaps": {
+          "FIFO": {
+            "B_temporal_locality-ep-0": 6.0,
+            "B_temporal_locality-ep-1": 0.0,
+            "B_temporal_locality-ep-2": 9.0,
+            "B_temporal_locality-ep-3": 7.0
+          },
+          "LFU": {
+            "B_temporal_locality-ep-0": 8.0,
+            "B_temporal_locality-ep-1": 7.0,
+            "B_temporal_locality-ep-2": 9.0,
+            "B_temporal_locality-ep-3": 13.0
+          },
+          "LRU": {
+            "B_temporal_locality-ep-0": 1.0,
+            "B_temporal_locality-ep-1": 1.0,
+            "B_temporal_locality-ep-2": 2.0,
+            "B_temporal_locality-ep-3": 1.0
+          },
+          "Learned": {
+            "B_temporal_locality-ep-0": 58.0,
+            "B_temporal_locality-ep-1": 41.0,
+            "B_temporal_locality-ep-2": 44.0,
+            "B_temporal_locality-ep-3": 66.0
+          },
+          "Random_mean": {
+            "B_temporal_locality-ep-0": 15.0,
+            "B_temporal_locality-ep-1": 2.0,
+            "B_temporal_locality-ep-2": 3.0,
+            "B_temporal_locality-ep-3": 19.0
+          }
+        },
+        "classical_policy_faults": {
+          "B_temporal_locality-ep-0": {
+            "Belady_MIN": {
+              "decision_latency_mean_s": 5.89333333967564e-05,
+              "decision_latency_std_s": 2.5548428905120364e-05,
+              "hit_ratio": 1.0,
+              "hits": 2000,
+              "page_faults": 0,
+              "total_references": 2000
+            },
+            "FIFO": {
+              "decision_latency_mean_s": 1.4699999863094288e-05,
+              "decision_latency_std_s": 3.314279024246584e-06,
+              "hit_ratio": 0.997,
+              "hits": 1994,
+              "page_faults": 6,
+              "total_references": 2000
+            },
+            "LFU": {
+              "decision_latency_mean_s": 0.0007952363634599765,
+              "decision_latency_std_s": 0.00240309833957857,
+              "hit_ratio": 0.996,
+              "hits": 1992,
+              "page_faults": 8,
+              "total_references": 2000
+            },
+            "LRU": {
+              "decision_latency_mean_s": 2.6850000040212763e-05,
+              "decision_latency_std_s": 1.0797569125327606e-05,
+              "hit_ratio": 0.9995,
+              "hits": 1999,
+              "page_faults": 1,
+              "total_references": 2000
+            },
+            "Random_seed0": {
+              "decision_latency_mean_s": 9.988888753772093e-06,
+              "decision_latency_std_s": 3.494422340923251e-06,
+              "hit_ratio": 0.9925,
+              "hits": 1985,
+              "page_faults": 15,
+              "total_references": 2000
+            }
+          },
+          "B_temporal_locality-ep-1": {
+            "Belady_MIN": {
+              "decision_latency_mean_s": 4.4499999603431206e-05,
+              "decision_latency_std_s": null,
+              "hit_ratio": 1.0,
+              "hits": 2000,
+              "page_faults": 0,
+              "total_references": 2000
+            },
+            "FIFO": {
+              "decision_latency_mean_s": 0.005016600000089966,
+              "decision_latency_std_s": null,
+              "hit_ratio": 1.0,
+              "hits": 2000,
+              "page_faults": 0,
+              "total_references": 2000
+            },
+            "LFU": {
+              "decision_latency_mean_s": 3.449999996973929e-05,
+              "decision_latency_std_s": 4.6489057606788814e-05,
+              "hit_ratio": 0.9965,
+              "hits": 1993,
+              "page_faults": 7,
+              "total_references": 2000
+            },
+            "LRU": {
+              "decision_latency_mean_s": 1.8700000055105193e-05,
+              "decision_latency_std_s": 1.0000030670198612e-07,
+              "hit_ratio": 0.9995,
+              "hits": 1999,
+              "page_faults": 1,
+              "total_references": 2000
+            },
+            "Random_seed0": {
+              "decision_latency_mean_s": 1.1766666830226313e-05,
+              "decision_latency_std_s": 3.6353207490622403e-06,
+              "hit_ratio": 0.999,
+              "hits": 1998,
+              "page_faults": 2,
+              "total_references": 2000
+            }
+          },
+          "B_temporal_locality-ep-2": {
+            "Belady_MIN": {
+              "decision_latency_mean_s": 4.2166666692840714e-05,
+              "decision_latency_std_s": 7.570703303365143e-06,
+              "hit_ratio": 1.0,
+              "hits": 2000,
+              "page_faults": 0,
+              "total_references": 2000
+            },
+            "FIFO": {
+              "decision_latency_mean_s": 1.7908333272013504e-05,
+              "decision_latency_std_s": 4.579020781538154e-06,
+              "hit_ratio": 0.9955,
+              "hits": 1991,
+              "page_faults": 9,
+              "total_references": 2000
+            },
+            "LFU": {
+              "decision_latency_mean_s": 1.985000001999045e-05,
+              "decision_latency_std_s": 4.79574456803361e-06,
+              "hit_ratio": 0.9955,
+              "hits": 1991,
+              "page_faults": 9,
+              "total_references": 2000
+            },
+            "LRU": {
+              "decision_latency_mean_s": 1.8020000243268442e-05,
+              "decision_latency_std_s": 6.7646160033758e-07,
+              "hit_ratio": 0.999,
+              "hits": 1998,
+              "page_faults": 2,
+              "total_references": 2000
+            },
+            "Random_seed0": {
+              "decision_latency_mean_s": 1.430000005105588e-05,
+              "decision_latency_std_s": 2.1664101546021006e-06,
+              "hit_ratio": 0.9985,
+              "hits": 1997,
+              "page_faults": 3,
+              "total_references": 2000
+            }
+          },
+          "B_temporal_locality-ep-3": {
+            "Belady_MIN": {
+              "decision_latency_mean_s": 3.832499987765914e-05,
+              "decision_latency_std_s": 1.1356138560240399e-05,
+              "hit_ratio": 1.0,
+              "hits": 2000,
+              "page_faults": 0,
+              "total_references": 2000
+            },
+            "FIFO": {
+              "decision_latency_mean_s": 1.3600000205439176e-05,
+              "decision_latency_std_s": 2.880341033854633e-06,
+              "hit_ratio": 0.9965,
+              "hits": 1993,
+              "page_faults": 7,
+              "total_references": 2000
+            },
+            "LFU": {
+              "decision_latency_mean_s": 1.6411764804883313e-05,
+              "decision_latency_std_s": 2.975761495662391e-06,
+              "hit_ratio": 0.9935,
+              "hits": 1987,
+              "page_faults": 13,
+              "total_references": 2000
+            },
+            "LRU": {
+              "decision_latency_mean_s": 1.699999993434176e-05,
+              "decision_latency_std_s": 2.900344984934863e-06,
+              "hit_ratio": 0.9995,
+              "hits": 1999,
+              "page_faults": 1,
+              "total_references": 2000
+            },
+            "Random_seed0": {
+              "decision_latency_mean_s": 9.730434731350018e-06,
+              "decision_latency_std_s": 3.925882410178943e-06,
+              "hit_ratio": 0.9905,
+              "hits": 1981,
+              "page_faults": 19,
+              "total_references": 2000
+            }
+          }
+        },
+        "flags": [
+          "CLASS_IMBALANCE: strong positive-class skew; do not rely on accuracy/F1 alone"
+        ],
+        "learned_policy_faults": {
+          "B_temporal_locality-ep-0": {
+            "decision_latency_mean_s": 0.008564080327843959,
+            "decision_latency_std_s": 0.004778942413716915,
+            "hit_ratio": 0.971,
+            "hits": 1942,
+            "page_faults": 58,
+            "total_references": 2000
+          },
+          "B_temporal_locality-ep-1": {
+            "decision_latency_mean_s": 0.006187469047723599,
+            "decision_latency_std_s": 0.002495378252415112,
+            "hit_ratio": 0.9795,
+            "hits": 1959,
+            "page_faults": 41,
+            "total_references": 2000
+          },
+          "B_temporal_locality-ep-2": {
+            "decision_latency_mean_s": 0.004707446808463422,
+            "decision_latency_std_s": 0.0023223878252274714,
+            "hit_ratio": 0.978,
+            "hits": 1956,
+            "page_faults": 44,
+            "total_references": 2000
+          },
+          "B_temporal_locality-ep-3": {
+            "decision_latency_mean_s": 0.007777834285700789,
+            "decision_latency_std_s": 0.004329178918172147,
+            "hit_ratio": 0.967,
+            "hits": 1934,
+            "page_faults": 66,
+            "total_references": 2000
+          }
+        },
+        "models": {
+          "hist_gradient_boosting": {
+            "status": "trained",
+            "test_metrics": {
+              "accuracy": 0.484375,
+              "brier_score": 0.3615048889139236,
+              "calibration_curve": [
+                [
+                  0.0786053360871667,
+                  0.5576923076923077
+                ],
+                [
+                  0.11402751783240607,
+                  0.43137254901960786
+                ],
+                [
+                  0.15202470468130524,
+                  0.5490196078431373
+                ],
+                [
+                  0.22718441783760182,
+                  0.47058823529411764
+                ],
+                [
+                  0.44269113256140324,
+                  0.29411764705882354
+                ]
+              ],
+              "f1": 0.014925373134328358,
+              "n_examples": 256,
+              "n_negative": 138,
+              "n_positive": 118,
+              "pr_auc": 0.39226475009528394,
+              "precision": 0.0625,
+              "recall": 0.00847457627118644,
+              "roc_auc": 0.4070867108818473
+            },
+            "train_metrics": {
+              "accuracy": 0.8289085545722714,
+              "brier_score": 0.1742718054634787,
+              "calibration_curve": [
+                [
+                  0.3309023519534627,
+                  0.027293350347369915
+                ],
+                [
+                  0.4781120001221292,
+                  0.21058231080218456
+                ],
+                [
+                  0.5358870991593914,
+                  0.5603063178047224
+                ],
+                [
+                  0.5988421665993902,
+                  0.8851935895617643
+                ],
+                [
+                  0.7186075499009998,
+                  0.979080981421075
+                ]
+              ],
+              "f1": 0.8550278792539896,
+              "n_examples": 70512,
+              "n_negative": 32966,
+              "n_positive": 37546,
+              "pr_auc": 0.9370775997981899,
+              "precision": 0.7789796365228815,
+              "recall": 0.9475310286049113,
+              "roc_auc": 0.9299596244590781
+            },
+            "val_metrics": {
+              "accuracy": 0.520221843003413,
+              "brier_score": 0.2600027372649394,
+              "calibration_curve": [
+                [
+                  0.3993987918463522,
+                  0.5645126892727661
+                ],
+                [
+                  0.5005593988618768,
+                  0.5589667584162609
+                ],
+                [
+                  0.5389196838183148,
+                  0.5498281786941581
+                ],
+                [
+                  0.5823878602390953,
+                  0.5637798634812287
+                ],
+                [
+                  0.6752416079372456,
+                  0.5113151152860803
+                ]
+              ],
+              "f1": 0.6183915846623685,
+              "n_examples": 23440,
+              "n_negative": 10555,
+              "n_positive": 12885,
+              "pr_auc": 0.5367803504762779,
+              "precision": 0.5494121193849865,
+              "recall": 0.7071788901823827,
+              "roc_auc": 0.48411990558169815
+            }
+          },
+          "logistic_regression": {
+            "status": "trained",
+            "test_metrics": {
+              "accuracy": 0.45703125,
+              "brier_score": 0.49050050464711203,
+              "calibration_curve": [
+                [
+                  0.7372650899105392,
+                  0.6346153846153846
+                ],
+                [
+                  0.895413992920308,
+                  0.6862745098039216
+                ],
+                [
+                  0.9487028968960052,
+                  0.45098039215686275
+                ],
+                [
+                  0.9755904494069102,
+                  0.29411764705882354
+                ],
+                [
+                  0.9940547525923135,
+                  0.23529411764705882
+                ]
+              ],
+              "f1": 0.6273458445040214,
+              "n_examples": 256,
+              "n_negative": 138,
+              "n_positive": 118,
+              "pr_auc": 0.3437049878491058,
+              "precision": 0.4588235294117647,
+              "recall": 0.9915254237288136,
+              "roc_auc": 0.2955661999508721
+            },
+            "train_metrics": {
+              "accuracy": 0.535142954390742,
+              "brier_score": 0.24837921998631354,
+              "calibration_curve": [
+                [
+                  0.5029774577498414,
+                  0.49982273275189676
+                ],
+                [
+                  0.5213938873351993,
+                  0.5234718479648277
+                ],
+                [
+                  0.5312822813042899,
+                  0.5420507729400085
+                ],
+                [
+                  0.5413220640258715,
+                  0.5338249893632109
+                ],
+                [
+                  0.5654294616829131,
+                  0.5632135006736155
+                ]
+              ],
+              "f1": 0.6840613794964722,
+              "n_examples": 70512,
+              "n_negative": 32966,
+              "n_positive": 37546,
+              "pr_auc": 0.5531644378229147,
+              "precision": 0.536010996646627,
+              "recall": 0.9451073350023971,
+              "roc_auc": 0.5233871426277434
+            },
+            "val_metrics": {
+              "accuracy": 0.5417662116040955,
+              "brier_score": 0.24884752616312317,
+              "calibration_curve": [
+                [
+                  0.5037984896893779,
+                  0.560580204778157
+                ],
+                [
+                  0.522519807239032,
+                  0.5618600682593856
+                ],
+                [
+                  0.5324269338008624,
+                  0.5251706484641638
+                ],
+                [
+                  0.541666612040268,
+                  0.5584470989761092
+                ],
+                [
+                  0.5642459921456783,
+                  0.5424488054607508
+                ]
+              ],
+              "f1": 0.6930879789696259,
+              "n_examples": 23440,
+              "n_negative": 10555,
+              "n_positive": 12885,
+              "pr_auc": 0.543489705255286,
+              "precision": 0.548480463096961,
+              "recall": 0.9412495149398525,
+              "roc_auc": 0.49353981684349413
+            }
+          }
+        },
+        "n_test_examples": 256,
+        "n_train_examples": 70512,
+        "n_val_examples": 23440,
+        "paired_comparisons_vs_learned": {
+          "Learned_vs_Belady_MIN": {
+            "ci_95_high": 71.00461987428648,
+            "ci_95_low": 33.495380125713524,
+            "interpretation": "negative mean_diff means the learned policy had FEWER faults (better) than the comparison policy",
+            "mean_diff": 52.25,
+            "n_episodes": 4,
+            "paired_ttest_pvalue": 0.0030249195087465874,
+            "paired_ttest_statistic": 8.86623245716032,
+            "std_diff": 11.786291472158096,
+            "wilcoxon_pvalue": 0.125
+          },
+          "Learned_vs_FIFO": {
+            "ci_95_high": 63.90645557435691,
+            "ci_95_low": 29.593544425643092,
+            "interpretation": "negative mean_diff means the learned policy had FEWER faults (better) than the comparison policy",
+            "mean_diff": 46.75,
+            "n_episodes": 4,
+            "paired_ttest_pvalue": 0.0032263867749446284,
+            "paired_ttest_statistic": 8.671917350715146,
+            "std_diff": 10.781929326423912,
+            "wilcoxon_pvalue": 0.125
+          },
+          "Learned_vs_LFU": {
+            "ci_95_high": 58.75230554260003,
+            "ci_95_low": 27.24769445739997,
+            "interpretation": "negative mean_diff means the learned policy had FEWER faults (better) than the comparison policy",
+            "mean_diff": 43.0,
+            "n_episodes": 4,
+            "paired_ttest_pvalue": 0.0032097893779779057,
+            "paired_ttest_statistic": 8.687311883149013,
+            "std_diff": 9.899494936611665,
+            "wilcoxon_pvalue": 0.125
+          },
+          "Learned_vs_LRU": {
+            "ci_95_high": 70.13882743476285,
+            "ci_95_low": 31.861172565237148,
+            "interpretation": "negative mean_diff means the learned policy had FEWER faults (better) than the comparison policy",
+            "mean_diff": 51.0,
+            "n_episodes": 4,
+            "paired_ttest_pvalue": 0.0034427024415518595,
+            "paired_ttest_statistic": 8.480392130747507,
+            "std_diff": 12.027745701779143,
+            "wilcoxon_pvalue": 0.125
+          },
+          "Learned_vs_Random": {
+            "ci_95_high": 47.93506176759298,
+            "ci_95_low": 37.06493823240702,
+            "interpretation": "negative mean_diff means the learned policy had FEWER faults (better) than the comparison policy",
+            "mean_diff": 42.5,
+            "n_episodes": 4,
+            "paired_ttest_pvalue": 0.00014227063908787822,
+            "paired_ttest_statistic": 24.885451860187597,
+            "std_diff": 3.415650255319866,
+            "wilcoxon_pvalue": 0.125
+          }
+        },
+        "selected_model": "logistic_regression"
+      }
+    },
+    "n_test_episodes": 4,
+    "n_train_episodes": 3,
+    "n_val_episodes": 1
+  }
+}

@@ -1,0 +1,404 @@
+{
+  "A_uniform_random": {
+    "horizons": {
+      "50": {
+        "belady_gaps": {},
+        "classical_policy_faults": {},
+        "flags": [],
+        "learned_policy_faults": {},
+        "models": {
+          "hist_gradient_boosting": {
+            "status": "trained",
+            "test_metrics": null,
+            "train_metrics": {
+              "accuracy": 0.8289085545722714,
+              "brier_score": 0.1742718054634787,
+              "calibration_curve": [
+                [
+                  0.3309023519534627,
+                  0.027293350347369915
+                ],
+                [
+                  0.4781120001221292,
+                  0.21058231080218456
+                ],
+                [
+                  0.5358870991593914,
+                  0.5603063178047224
+                ],
+                [
+                  0.5988421665993902,
+                  0.8851935895617643
+                ],
+                [
+                  0.7186075499009998,
+                  0.979080981421075
+                ]
+              ],
+              "f1": 0.8550278792539896,
+              "n_examples": 70512,
+              "n_negative": 32966,
+              "n_positive": 37546,
+              "pr_auc": 0.9370775997981899,
+              "precision": 0.7789796365228815,
+              "recall": 0.9475310286049113,
+              "roc_auc": 0.9299596244590781
+            },
+            "val_metrics": {
+              "accuracy": 0.520221843003413,
+              "brier_score": 0.2600027372649394,
+              "calibration_curve": [
+                [
+                  0.3993987918463522,
+                  0.5645126892727661
+                ],
+                [
+                  0.5005593988618768,
+                  0.5589667584162609
+                ],
+                [
+                  0.5389196838183148,
+                  0.5498281786941581
+                ],
+                [
+                  0.5823878602390953,
+                  0.5637798634812287
+                ],
+                [
+                  0.6752416079372456,
+                  0.5113151152860803
+                ]
+              ],
+              "f1": 0.6183915846623685,
+              "n_examples": 23440,
+              "n_negative": 10555,
+              "n_positive": 12885,
+              "pr_auc": 0.5367803504762779,
+              "precision": 0.5494121193849865,
+              "recall": 0.7071788901823827,
+              "roc_auc": 0.48411990558169815
+            }
+          },
+          "logistic_regression": {
+            "status": "trained",
+            "test_metrics": null,
+            "train_metrics": {
+              "accuracy": 0.535142954390742,
+              "brier_score": 0.24837921998631354,
+              "calibration_curve": [
+                [
+                  0.5029774577498414,
+                  0.49982273275189676
+                ],
+                [
+                  0.5213938873351993,
+                  0.5234718479648277
+                ],
+                [
+                  0.5312822813042899,
+                  0.5420507729400085
+                ],
+                [
+                  0.5413220640258715,
+                  0.5338249893632109
+                ],
+                [
+                  0.5654294616829131,
+                  0.5632135006736155
+                ]
+              ],
+              "f1": 0.6840613794964722,
+              "n_examples": 70512,
+              "n_negative": 32966,
+              "n_positive": 37546,
+              "pr_auc": 0.5531644378229147,
+              "precision": 0.536010996646627,
+              "recall": 0.9451073350023971,
+              "roc_auc": 0.5233871426277434
+            },
+            "val_metrics": {
+              "accuracy": 0.5417662116040955,
+              "brier_score": 0.24884752616312317,
+              "calibration_curve": [
+                [
+                  0.5037984896893779,
+                  0.560580204778157
+                ],
+                [
+                  0.522519807239032,
+                  0.5618600682593856
+                ],
+                [
+                  0.5324269338008624,
+                  0.5251706484641638
+                ],
+                [
+                  0.541666612040268,
+                  0.5584470989761092
+                ],
+                [
+                  0.5642459921456783,
+                  0.5424488054607508
+                ]
+              ],
+              "f1": 0.6930879789696259,
+              "n_examples": 23440,
+              "n_negative": 10555,
+              "n_positive": 12885,
+              "pr_auc": 0.543489705255286,
+              "precision": 0.548480463096961,
+              "recall": 0.9412495149398525,
+              "roc_auc": 0.49353981684349413
+            }
+          }
+        },
+        "n_test_examples": 0,
+        "n_train_examples": 70512,
+        "n_val_examples": 23440,
+        "paired_comparisons_vs_learned": {
+          "Learned_vs_Belady_MIN": {
+            "insufficient_data": true,
+            "n_episodes": 0
+          },
+          "Learned_vs_FIFO": {
+            "insufficient_data": true,
+            "n_episodes": 0
+          },
+          "Learned_vs_LFU": {
+            "insufficient_data": true,
+            "n_episodes": 0
+          },
+          "Learned_vs_LRU": {
+            "insufficient_data": true,
+            "n_episodes": 0
+          },
+          "Learned_vs_Random": {
+            "insufficient_data": true,
+            "n_episodes": 0
+          }
+        },
+        "selected_model": "logistic_regression"
+      }
+    },
+    "n_test": 0,
+    "n_train": 3,
+    "n_val": 1,
+    "split": {
+      "seed": 0,
+      "test_episodes": [],
+      "test_fraction": 0.15,
+      "train_episodes": [
+        "A_uniform_random-ep-2",
+        "A_uniform_random-ep-0",
+        "A_uniform_random-ep-1"
+      ],
+      "train_fraction": 0.7,
+      "val_episodes": [
+        "A_uniform_random-ep-3"
+      ],
+      "val_fraction": 0.15
+    }
+  },
+  "B_temporal_locality": {
+    "horizons": {
+      "50": {
+        "belady_gaps": {},
+        "classical_policy_faults": {},
+        "flags": [
+          "CLASS_IMBALANCE: strong positive-class skew; do not rely on accuracy/F1 alone"
+        ],
+        "learned_policy_faults": {},
+        "models": {
+          "hist_gradient_boosting": {
+            "status": "trained",
+            "test_metrics": null,
+            "train_metrics": {
+              "accuracy": 1.0,
+              "brier_score": 0.023066508573373588,
+              "calibration_curve": [
+                [
+                  0.008482862342621994,
+                  0.0
+                ],
+                [
+                  0.07250574259159283,
+                  0.0
+                ],
+                [
+                  0.3824135123637651,
+                  0.3142857142857143
+                ],
+                [
+                  0.8834208376181462,
+                  1.0
+                ],
+                [
+                  0.9671622288682039,
+                  1.0
+                ]
+              ],
+              "f1": 1.0,
+              "n_examples": 176,
+              "n_negative": 95,
+              "n_positive": 81,
+              "pr_auc": 1.0000000000000002,
+              "precision": 1.0,
+              "recall": 1.0,
+              "roc_auc": 1.0
+            },
+            "val_metrics": {
+              "accuracy": 0.7125,
+              "brier_score": 0.24964961159044968,
+              "calibration_curve": [
+                [
+                  0.006935079673988624,
+                  0.25
+                ],
+                [
+                  0.060872615365650515,
+                  0.375
+                ],
+                [
+                  0.3183031677104164,
+                  0.1875
+                ],
+                [
+                  0.7576583208629296,
+                  0.875
+                ],
+                [
+                  0.939048462244496,
+                  0.625
+                ]
+              ],
+              "f1": 0.676056338028169,
+              "n_examples": 80,
+              "n_negative": 43,
+              "n_positive": 37,
+              "pr_auc": 0.5944495893476426,
+              "precision": 0.7058823529411765,
+              "recall": 0.6486486486486487,
+              "roc_auc": 0.6851037083595224
+            }
+          },
+          "logistic_regression": {
+            "status": "trained",
+            "test_metrics": null,
+            "train_metrics": {
+              "accuracy": 0.7727272727272727,
+              "brier_score": 0.15499589020645962,
+              "calibration_curve": [
+                [
+                  0.07856662316077641,
+                  0.08333333333333333
+                ],
+                [
+                  0.2716680303220696,
+                  0.17142857142857143
+                ],
+                [
+                  0.4216871773159691,
+                  0.4857142857142857
+                ],
+                [
+                  0.6380565724859086,
+                  0.6857142857142857
+                ],
+                [
+                  0.9020592136680233,
+                  0.8857142857142857
+                ]
+              ],
+              "f1": 0.7402597402597403,
+              "n_examples": 176,
+              "n_negative": 95,
+              "n_positive": 81,
+              "pr_auc": 0.837760876550655,
+              "precision": 0.7808219178082192,
+              "recall": 0.7037037037037037,
+              "roc_auc": 0.8614684860298896
+            },
+            "val_metrics": {
+              "accuracy": 0.75,
+              "brier_score": 0.1829554363665729,
+              "calibration_curve": [
+                [
+                  0.0673483477245241,
+                  0.0
+                ],
+                [
+                  0.25085243562626464,
+                  0.3125
+                ],
+                [
+                  0.3664398414724188,
+                  0.4375
+                ],
+                [
+                  0.6515407071856575,
+                  0.9375
+                ],
+                [
+                  0.8995909920329312,
+                  0.625
+                ]
+              ],
+              "f1": 0.7058823529411765,
+              "n_examples": 80,
+              "n_negative": 43,
+              "n_positive": 37,
+              "pr_auc": 0.7089158843771256,
+              "precision": 0.7741935483870968,
+              "recall": 0.6486486486486487,
+              "roc_auc": 0.8108108108108107
+            }
+          }
+        },
+        "n_test_examples": 0,
+        "n_train_examples": 176,
+        "n_val_examples": 80,
+        "paired_comparisons_vs_learned": {
+          "Learned_vs_Belady_MIN": {
+            "insufficient_data": true,
+            "n_episodes": 0
+          },
+          "Learned_vs_FIFO": {
+            "insufficient_data": true,
+            "n_episodes": 0
+          },
+          "Learned_vs_LFU": {
+            "insufficient_data": true,
+            "n_episodes": 0
+          },
+          "Learned_vs_LRU": {
+            "insufficient_data": true,
+            "n_episodes": 0
+          },
+          "Learned_vs_Random": {
+            "insufficient_data": true,
+            "n_episodes": 0
+          }
+        },
+        "selected_model": "logistic_regression"
+      }
+    },
+    "n_test": 0,
+    "n_train": 3,
+    "n_val": 1,
+    "split": {
+      "seed": 0,
+      "test_episodes": [],
+      "test_fraction": 0.15,
+      "train_episodes": [
+        "B_temporal_locality-ep-2",
+        "B_temporal_locality-ep-0",
+        "B_temporal_locality-ep-1"
+      ],
+      "train_fraction": 0.7,
+      "val_episodes": [
+        "B_temporal_locality-ep-3"
+      ],
+      "val_fraction": 0.15
+    }
+  }
+}

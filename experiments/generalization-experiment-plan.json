@@ -1,0 +1,47 @@
+{
+  "status": "prepared_not_executed",
+  "description": "Configuration for the two generalization evaluations requested in Task 5. No large-scale experiment has been run against this plan -- it specifies exactly how episode IDs, seeds, and splits should be constructed when it is executed.",
+  "shared_settings": {
+    "episode_length": 2000,
+    "working_memory_capacity": 16,
+    "horizons": [25, 50, 100, 200, 500],
+    "models": ["logistic_regression", "hist_gradient_boosting"],
+    "episode_id_convention": "{family_name}-ep-{seed}, e.g. 'A_uniform_random-ep-17'. This is a pure naming convention -- no change to DatasetExample or the dataset pipeline. It lets an episode's originating workload family be recovered from example.episode_id via a string prefix, which is all leave-one-family-out grouping needs.",
+    "seed_pool_per_family": {
+      "note": "Non-overlapping seed ranges per family so within-distribution and leave-one-family-out runs draw from disjoint episode pools and can be reproduced independently.",
+      "A_uniform_random": [0, 199],
+      "B_temporal_locality": [0, 199],
+      "C_bursty": [0, 199],
+      "D_long_range_reuse": [0, 199],
+      "E_phase_changing": [0, 199],
+      "F_non_stationary": [0, 199]
+    }
+  },
+  "protocol_A_within_distribution": {
+    "description": "For each family independently: generate N episodes from that family's seed pool, split by episode ID (never by example) using the existing neuropager.experiment.split.split_episodes at the default 70/15/15 fractions, train/evaluate within that family only. Six independent within-distribution results, one per family.",
+    "per_family_episode_count": 200,
+    "split_fractions": {"train": 0.7, "val": 0.15, "test": 0.15},
+    "split_seed": 0,
+    "reuses_unchanged": [
+      "neuropager.experiment.split.split_episodes",
+      "neuropager.experiment.split.filter_examples_by_episodes",
+      "neuropager.experiment.runner.run_model_experiment"
+    ]
+  },
+  "protocol_B_leave_one_family_out": {
+    "description": "For each family F in the six: pool episodes from the OTHER five families for train+val (split 82/18 within that pool, i.e. 0.7/(0.7+0.15) train fraction of the non-test portion, so val comes only from the training families, never from F); test exclusively on F's own held-out episodes, never seen in train or val. Repeat once per family (6 runs total per model/horizon).",
+    "per_family_episode_count": 200,
+    "for_each_held_out_family": {
+      "train_val_pool": "episodes from the other 5 families (5 x 200 = 1000 episodes)",
+      "train_val_split_fractions": {"train": 0.82, "val": 0.18},
+      "test_pool": "all 200 episodes from the held-out family F, entirely unseen during training/validation"
+    },
+    "implementation_note": "Requires pooling DatasetExample lists from multiple families before calling split_episodes on the combined episode_id set (using the training families' IDs only), then filtering the held-out family's examples separately for the test set. No change to neuropager.dataset or neuropager.experiment needed -- this is caller-side orchestration only.",
+    "runs_required": "6 held-out families x 5 horizons x 2 models = 60 train/eval runs, before this is executed at scale"
+  },
+  "estimated_scale_if_executed": {
+    "total_episodes": "1200 (200 per family x 6 families), shared across both protocols via the same seed pools",
+    "total_train_eval_runs": "protocol A: 6 families x 5 horizons x 2 models = 60; protocol B: 6 held-out families x 5 horizons x 2 models = 60; combined = 120",
+    "not_executed_this_task": true
+  }
+}
