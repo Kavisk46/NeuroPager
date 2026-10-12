@@ -216,3 +216,7 @@ __marimo__/
 
 # Streamlit
 .streamlit/secrets.toml
+
+# Train/serve sensitivity analysis: large scratch caches and result CSVs,
+# not meant for version control (script that produces them is tracked).
+experiments/generalization-experiment-2/analysis/train_serve_sensitivity/
