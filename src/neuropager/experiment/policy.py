@@ -55,7 +55,12 @@ class LearnedUtilityPolicy(PageReplacementPolicy):
             only; it does not affect victim selection directly).
     """
 
-    def __init__(self, model: Pipeline, horizon: int) -> None:
+    def __init__(
+        self,
+        model: Pipeline,
+        horizon: int,
+        feature_names: tuple[str, ...] = FEATURE_NAMES,
+    ) -> None:
         """Initialize the learned-utility policy.
 
         Args:
@@ -63,9 +68,17 @@ class LearnedUtilityPolicy(PageReplacementPolicy):
                 :mod:`neuropager.experiment.models`) exposing
                 ``predict_proba``.
             horizon: The reuse horizon this model was trained for.
+            feature_names: The feature columns, in order, that ``model``
+                was trained on (see the production script's
+                ``FEATURE_SETS``). Defaults to every feature
+                (:data:`~neuropager.dataset.features.FEATURE_NAMES`),
+                matching this class's original, pre-feature-set behavior
+                exactly. Must match training exactly, or ``model`` will
+                be fed columns in the wrong shape or order.
         """
         self.model = model
         self.horizon = horizon
+        self.feature_names = feature_names
         self._tick = 0
         self._access_ticks: dict[MemoryKey, list[int]] = defaultdict(list)
 
@@ -118,9 +131,11 @@ class LearnedUtilityPolicy(PageReplacementPolicy):
                 if entry.access_count > 0
                 else MISSING_HISTORY_SENTINEL
             )
-            row = [getattr(features, name) for name in FEATURE_NAMES]
-            row[FEATURE_NAMES.index("fault_count")] = fault_count
-            row[FEATURE_NAMES.index("fault_ratio")] = fault_ratio
+            row = [getattr(features, name) for name in self.feature_names]
+            if "fault_count" in self.feature_names:
+                row[self.feature_names.index("fault_count")] = fault_count
+            if "fault_ratio" in self.feature_names:
+                row[self.feature_names.index("fault_ratio")] = fault_ratio
             rows.append((key, row))
 
         x = np.asarray([row for _, row in rows], dtype=np.float64)

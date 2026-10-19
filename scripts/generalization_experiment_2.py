@@ -158,6 +158,34 @@ FAMILY_BUILDERS: dict[str, Callable[[int], WorkloadConfig]] = {
 }
 FAMILIES = list(FAMILY_BUILDERS)
 
+FEATURE_SETS: dict[str, tuple[str, ...]] = {
+    "FULL13": FEATURE_NAMES,
+    "NO_ESF12": tuple(name for name in FEATURE_NAMES if name != "elapsed_since_fault"),
+    "NO_RECENCY7": tuple(
+        name
+        for name in FEATURE_NAMES
+        if name
+        not in {
+            "elapsed_since_fault",
+            "recency",
+            "recent_burst",
+            "long_burst",
+            "recent_interval",
+            "normalized_recency",
+        }
+    ),
+}
+"""Named, column-dropping feature-set variants, for the elapsed_since_fault
+train/serve skew fix (see BUGFIX_NOTES.md).
+
+FULL13 is exactly FEATURE_NAMES, in original order -- selecting it is a
+no-op, so the default behavior of this script is unchanged. NO_ESF12 and
+NO_RECENCY7 drop columns only; neither changes dataset generation,
+feature computation, or labels. See select_feature_columns() for where a
+feature set actually takes effect.
+"""
+DEFAULT_FEATURE_SET = "FULL13"
+
 STRUCTURAL_NULL_CONDITIONS = {("D_long_range_reuse", h) for h in (25, 50, 100)}
 REDUNDANT_HORIZON_PAIRS = {
     "D_long_range_reuse": (200, 500),
@@ -208,6 +236,7 @@ def build_run_config(
     horizons: list[int],
     n_episodes_per_family: int,
     random_seeds: list[int],
+    feature_names: tuple[str, ...] = FEATURE_NAMES,
 ) -> dict[str, Any]:
     """Build the canonical, hashable descriptor of every locked scientific parameter.
 
@@ -217,6 +246,14 @@ def build_run_config(
     mechanics (checkpoint paths, timing, hardware). Two runs with the same
     build_run_config() output are, by construction, scientifically
     identical runs.
+
+    ``feature_names`` defaults to the full ``FEATURE_NAMES`` tuple, so a
+    caller that never heard of feature sets (or the original, unmodified
+    campaign) hashes exactly as before. Passing a reduced feature set
+    (see ``FEATURE_SETS``) changes ``feature_order`` below, and therefore
+    the hash -- by design, so a config_hash mismatch always catches a
+    checkpoint computed under a different feature set, never silently
+    treats one as interchangeable with another.
     """
     return {
         "checkpoint_schema_version": CHECKPOINT_SCHEMA_VERSION,
@@ -232,7 +269,7 @@ def build_run_config(
         "structural_null_conditions": sorted([list(pair) for pair in STRUCTURAL_NULL_CONDITIONS]),
         "redundant_horizon_pairs": {k: list(v) for k, v in sorted(REDUNDANT_HORIZON_PAIRS.items())},
         "imbalanced_families": sorted(IMBALANCED_FAMILIES),
-        "feature_order": list(FEATURE_NAMES),
+        "feature_order": list(feature_names),
     }
 
 
@@ -678,6 +715,35 @@ class SplitArrays:
     n_examples: int
 
 
+def select_feature_columns(split: SplitArrays, feature_names: tuple[str, ...]) -> SplitArrays:
+    """Return a view of ``split`` restricted to ``feature_names``'s columns, in that order.
+
+    This is the ONLY place a feature-set choice (see FEATURE_SETS) takes
+    effect. Every cache (FamilyCache.x) always has every FEATURE_NAMES
+    column -- build_family_cache() is never told which feature set is
+    active, so dataset generation, feature computation, and labels are
+    byte-identical regardless of feature set. Only the columns a model
+    actually trains/evaluates on are selected, right here, just before
+    train_and_get_model()/eval_model() ever see them.
+
+    Passing ``feature_names=FEATURE_NAMES`` (FULL13) returns ``split``
+    completely untouched -- not even a value-identical copy. This matters:
+    fancy-indexing a copy of every column in order produces the exact same
+    float64 *values* but a different array object, and a scikit-learn
+    LogisticRegression pipeline fit on that copy was measured to diverge
+    from a fit on the original by ~1e-14 per prediction (BLAS-level
+    floating-point reduction order depends on the array's memory identity,
+    not just its values) -- enough, over many iterations on real data, to
+    flip a handful of borderline predictions. Returning ``split`` itself
+    for FULL13 avoids that entirely, so the default feature set is a true
+    identity, not merely a value-equal one.
+    """
+    if split.x is None or feature_names == FEATURE_NAMES:
+        return split
+    indices = [FEATURE_NAMES.index(name) for name in feature_names]
+    return SplitArrays(x=split.x[:, indices], y=split.y, n_examples=split.n_examples)
+
+
 EPISODE_BATCH_SIZE = 2
 """Episodes processed per generate_dataset() call when building a family's cache.
 
@@ -1008,11 +1074,18 @@ def evaluate_learned_policy_on_episodes(
     model: Any,
     horizon: int,
     episodes: list[Episode],
+    feature_names: tuple[str, ...] = FEATURE_NAMES,
 ) -> dict[str, PolicyResult]:
-    """Replay LearnedUtilityPolicy(model, horizon) on a set of episodes."""
+    """Replay LearnedUtilityPolicy(model, horizon) on a set of episodes.
+
+    ``feature_names`` must be the same feature set ``model`` was trained
+    on (see FEATURE_SETS) -- LearnedUtilityPolicy uses it to build each
+    decision's row in the matching column order, so the model's input at
+    serving time has the same shape and meaning it was fit on.
+    """
     results = {}
     for episode in episodes:
-        policy = LearnedUtilityPolicy(model=model, horizon=horizon)
+        policy = LearnedUtilityPolicy(model=model, horizon=horizon, feature_names=feature_names)
         events, latencies = replay_policy(episode.workload, policy, episode.episode_id)
         results[episode.episode_id] = summarize_events(events, latencies)
     return results
@@ -1109,8 +1182,18 @@ def build_horizon_result(
     test_episodes: list[Episode],
     classical_results: dict[str, dict[str, PolicyResult]],
     random_seeds: list[int],
+    feature_names: tuple[str, ...] = FEATURE_NAMES,
 ) -> dict[str, Any]:
-    """Train both models, select one by validation, replay it, and assemble one horizon's result."""
+    """Train both models, select one by validation, replay it, and assemble one horizon's result.
+
+    ``train``/``val``/``test`` must already be restricted to
+    ``feature_names``'s columns (see select_feature_columns()) -- this
+    function trains and evaluates on whatever columns it is handed; it
+    does not itself select or drop any column. ``feature_names`` is only
+    threaded through from here so the final operational replay step
+    (evaluate_learned_policy_on_episodes()) builds its online rows with
+    the matching column order.
+    """
     model_info: dict[str, dict[str, Any]] = {}
     for model_name in MODEL_NAME_LIST:
         if train.x is None:
@@ -1149,7 +1232,7 @@ def build_horizon_result(
     if selected_name is not None:
         selected_model = model_info[selected_name]["model"]
         learned_results = evaluate_learned_policy_on_episodes(
-            selected_model, horizon, test_episodes
+            selected_model, horizon, test_episodes, feature_names
         )
     else:
         learned_results = {}
@@ -1190,6 +1273,7 @@ def build_horizon_result(
 
     return {
         "flags": interpretation_flags(family_or_heldout, horizon),
+        "feature_set_columns": list(feature_names),
         "n_train_examples": train.n_examples,
         "n_val_examples": val.n_examples,
         "n_test_examples": test.n_examples,
@@ -1220,8 +1304,16 @@ def run_protocols_memory_bounded(
     horizons: list[int],
     random_seeds: list[int],
     cfg_hash: str,
+    feature_names: tuple[str, ...] = FEATURE_NAMES,
 ) -> tuple[dict[str, Any], dict[str, Any]]:
     """Run Protocol A (within-distribution) and Protocol B (leave-one-family-out) together.
+
+    ``feature_names`` (see FEATURE_SETS) selects which of FamilyCache's
+    always-full 13 columns actually reach model training/evaluation --
+    FamilyCache itself, and therefore dataset generation, is identical
+    regardless of this argument. Defaults to FEATURE_NAMES (FULL13),
+    which is a no-op selection, so omitting it reproduces this function's
+    original, unmodified behavior exactly.
 
     Protocol A: one independent result per family (never pools the six
     families into one headline result -- each family's 70/15/15 split,
@@ -1402,9 +1494,15 @@ def run_protocols_memory_bounded(
             train_idx = episode_ids_to_indices(cache.episode_id_list, split.train_episodes)
             val_idx = episode_ids_to_indices(cache.episode_id_list, split.val_episodes)
             test_idx = episode_ids_to_indices(cache.episode_id_list, split.test_episodes)
-            train_arrays = select_split_arrays(cache.x, y, cache.episode_idx, train_idx)
-            val_arrays = select_split_arrays(cache.x, y, cache.episode_idx, val_idx)
-            test_arrays = select_split_arrays(cache.x, y, cache.episode_idx, test_idx)
+            train_arrays = select_feature_columns(
+                select_split_arrays(cache.x, y, cache.episode_idx, train_idx), feature_names
+            )
+            val_arrays = select_feature_columns(
+                select_split_arrays(cache.x, y, cache.episode_idx, val_idx), feature_names
+            )
+            test_arrays = select_feature_columns(
+                select_split_arrays(cache.x, y, cache.episode_idx, test_idx), feature_names
+            )
             episode_by_id = {e.episode_id: e for e in episodes[family]}
             test_episode_objs = [episode_by_id[eid] for eid in split.test_episodes]
 
@@ -1417,6 +1515,7 @@ def run_protocols_memory_bounded(
                 test_episode_objs,
                 classical_results,
                 random_seeds,
+                feature_names,
             )
             protocol_a_results[family]["horizons"][str(horizon)] = horizon_result
             write_json(
@@ -1444,8 +1543,12 @@ def run_protocols_memory_bounded(
                 val_idx = episode_ids_to_indices(cache.episode_id_list, fold_split.val_episodes)
                 train_specs.append((cache, horizon, train_idx))
                 val_specs.append((cache, horizon, val_idx))
-            train_arrays = pool_families_split_arrays(train_specs)
-            val_arrays = pool_families_split_arrays(val_specs)
+            train_arrays = select_feature_columns(
+                pool_families_split_arrays(train_specs), feature_names
+            )
+            val_arrays = select_feature_columns(
+                pool_families_split_arrays(val_specs), feature_names
+            )
             # Reclaim pooling's transient per-family masked-copy memory
             # (see pool_families_split_arrays()'s docstring) before the
             # memory-intensive model-training phase below -- pure
@@ -1461,10 +1564,13 @@ def run_protocols_memory_bounded(
             # duplicate this family's entire, already-resident cache just to
             # select 100% of its own rows).
             ho_cache = get_family_cache(held_out)
-            test_arrays = SplitArrays(
-                x=ho_cache.x,
-                y=ho_cache.y_by_horizon[horizon],
-                n_examples=len(ho_cache.episode_idx),
+            test_arrays = select_feature_columns(
+                SplitArrays(
+                    x=ho_cache.x,
+                    y=ho_cache.y_by_horizon[horizon],
+                    n_examples=len(ho_cache.episode_idx),
+                ),
+                feature_names,
             )
             test_episode_objs = list(episodes[held_out])
 
@@ -1477,6 +1583,7 @@ def run_protocols_memory_bounded(
                 test_episode_objs,
                 classical_results,
                 random_seeds,
+                feature_names,
             )
             protocol_b_results[held_out]["horizons"][str(horizon)] = horizon_result
             write_json(
@@ -1510,11 +1617,20 @@ def run_experiment(
     random_seeds: list[int],
     experiment_root: Path,
     experiment_id: str,
+    feature_set: str = DEFAULT_FEATURE_SET,
 ) -> dict[str, Any]:
     """Run the full generation + Protocol A + Protocol B pipeline for a given scope.
 
     Parameterized so the same code path serves both --trial (small scope,
     schema verification) and the full run (all families/horizons, N=200).
+
+    ``feature_set`` (a key into FEATURE_SETS) defaults to "FULL13" --
+    every column, original order -- which reproduces this function's
+    original, pre-feature-set behavior exactly (see select_feature_columns()).
+    "NO_ESF12" and "NO_RECENCY7" are the elapsed_since_fault train/serve
+    skew fix's two variants (see BUGFIX_NOTES.md); neither changes
+    dataset generation, workloads, seeds, splits, labels, or baselines --
+    only which feature columns a model ever trains or serves on.
 
     Interruption-safe and resumable: every unit of work (a classical
     baseline episode, a Protocol A/B (family-or-fold, horizon) combo) is
@@ -1528,12 +1644,15 @@ def run_experiment(
     different configurations.
     """
     start_time = time.perf_counter()
+    feature_names = FEATURE_SETS[feature_set]
     experiment_root.mkdir(parents=True, exist_ok=True)
     checkpoint_dir = experiment_root / "checkpoints"
     checkpoint_dir.mkdir(parents=True, exist_ok=True)
     replay_count = 0
 
-    run_cfg = build_run_config(families, horizons, n_episodes_per_family, random_seeds)
+    run_cfg = build_run_config(
+        families, horizons, n_episodes_per_family, random_seeds, feature_names
+    )
     cfg_hash = config_hash(run_cfg)
 
     config_path = checkpoint_dir / "config.json"
@@ -1584,7 +1703,8 @@ def run_experiment(
     # horizon-outer replacement, which generates and immediately reduces
     # to compact numpy arrays one family at a time.
     protocol_a_results, protocol_b_results = run_protocols_memory_bounded(
-        episodes, classical_results, experiment_root, horizons, random_seeds, cfg_hash
+        episodes, classical_results, experiment_root, horizons, random_seeds, cfg_hash,
+        feature_names,
     )
     log("Protocol A complete")
     write_json(protocol_a_results, experiment_root / "protocol_a_results.json")
@@ -1603,7 +1723,8 @@ def run_experiment(
         "sklearn_version": sklearn.__version__,
         "python_version": sys.version,
         "platform": platform.platform(),
-        "feature_order": list(FEATURE_NAMES),
+        "feature_set": feature_set,
+        "feature_order": list(feature_names),
         "model_configs": {name: model_config(name, TRAIN_SEED) for name in MODEL_NAME_LIST},
         "config_hash": cfg_hash,
         "checkpoint_schema_version": CHECKPOINT_SCHEMA_VERSION,
@@ -1649,25 +1770,61 @@ def main() -> None:
         action="store_true",
         help="Run the mandated small fail-safe trial instead of the full experiment.",
     )
+    parser.add_argument(
+        "--feature-set",
+        choices=list(FEATURE_SETS),
+        default=DEFAULT_FEATURE_SET,
+        help=(
+            "Which feature columns models train/serve on (default: FULL13, "
+            "every column -- identical to this script's original, "
+            "pre-feature-set behavior). See FEATURE_SETS and BUGFIX_NOTES.md."
+        ),
+    )
+    parser.add_argument(
+        "--experiment-root",
+        type=Path,
+        default=None,
+        help=(
+            "Override the output directory. Default is derived from "
+            "--feature-set (and --trial), and NEVER overwrites the original "
+            "experiments/generalization-experiment-2/ results unless you "
+            "explicitly point --experiment-root at that exact path."
+        ),
+    )
     args = parser.parse_args()
 
+    default_roots = {
+        "FULL13": Path("experiments/generalization-experiment-2"),
+        "NO_ESF12": Path("experiments/v2_no_esf12"),
+        "NO_RECENCY7": Path("experiments/v2_no_recency7"),
+    }
+    default_trial_roots = {
+        "FULL13": Path("experiments/generalization-experiment-2-trial"),
+        "NO_ESF12": Path("experiments/v2_no_esf12-trial"),
+        "NO_RECENCY7": Path("experiments/v2_no_recency7-trial"),
+    }
+
     if args.trial:
+        experiment_root = args.experiment_root or default_trial_roots[args.feature_set]
         run_experiment(
             families=["A_uniform_random", "B_temporal_locality"],
             horizons=[50],
             n_episodes_per_family=10,
             random_seeds=[0],
-            experiment_root=Path("experiments/generalization-experiment-2-trial"),
+            experiment_root=experiment_root,
             experiment_id="generalization-experiment-2-trial",
+            feature_set=args.feature_set,
         )
     else:
+        experiment_root = args.experiment_root or default_roots[args.feature_set]
         run_experiment(
             families=FAMILIES,
             horizons=HORIZONS,
             n_episodes_per_family=FULL_SPEC_EPISODES_PER_FAMILY,
             random_seeds=RANDOM_SEEDS,
-            experiment_root=Path("experiments/generalization-experiment-2"),
+            experiment_root=experiment_root,
             experiment_id="generalization-experiment-2",
+            feature_set=args.feature_set,
         )
 
 

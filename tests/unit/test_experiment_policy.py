@@ -140,12 +140,16 @@ def test_select_victim_signature_matches_the_shared_policy_interface() -> None:
 
 
 def test_constructor_has_no_future_or_belady_parameter() -> None:
-    """LearnedUtilityPolicy's constructor only accepts a model and a horizon.
+    """LearnedUtilityPolicy's constructor accepts no future/oracle information.
 
     Unlike BeladyMinPolicy (which legitimately takes a future reference
     string at construction time), the learned policy must never be
     constructible with anything resembling future/oracle information.
+    ``feature_names`` is not future information -- it only says which
+    already-computed columns to read, the same way for every page, and
+    defaults to every feature (this class's original, pre-feature-set
+    behavior) -- so it is listed here, but future/belady names are not.
     """
     signature = inspect.signature(LearnedUtilityPolicy.__init__)
 
-    assert list(signature.parameters) == ["self", "model", "horizon"]
+    assert list(signature.parameters) == ["self", "model", "horizon", "feature_names"]
